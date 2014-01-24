@@ -24,7 +24,7 @@ Later, in 2011, we partnered with [Lotoluck](http://lotoluck.com/) to get the lo
 
 [![ScreenShot](https://github.com/androidsx/lottodroid/raw/master/img/youtube.png)](http://www.youtube.com/watch?v=AwKkB9oBpPU)
 
-
 ## Contributors
 
 The first version of 2009 was developed by [espinchi](github.com/espinchi) and [ompemi](github.com/ompemi), and in 2011 [hudomjo](https://github.com/hudomju) did a refactoring to switch to Lotoluck as our lottery result provider.
+
