@@ -12,14 +12,14 @@ public class LoteriaNacional implements Lottery {
 	private final int premio1;
 	private final int fraccion;
 	private final int serie;
-	private final int premio2;
+	private final String premio2;
 	private final int reintegro1;
 	private final int reintegro2;
 	private final int reintegro3;
 	private ArrayList<Premio> premios = new ArrayList<Premio>();
 
 	public LoteriaNacional(Date date, int premio1, int fraccion, int serie,
-			int premio2, int reintegro1, int reintegro2, int reintegro3) {
+			String premio2, int reintegro1, int reintegro2, int reintegro3) {
 		this.date = date;
 		this.premio1 = premio1;
 		this.fraccion = fraccion;
@@ -89,7 +89,7 @@ public class LoteriaNacional implements Lottery {
 		return serie;
 	}
 
-	public int getPremio2() {
+	public String getPremio2() {
 		return premio2;
 	}
 

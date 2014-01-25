@@ -62,7 +62,7 @@ class LoteriaNacionalDB implements LotteryDB<LoteriaNacional> {
 		editor.putInt(PREMIO1, loteriaNacional.getPremio1());
 		editor.putInt(FRACCION, loteriaNacional.getFraccion());
 		editor.putInt(SERIE, loteriaNacional.getSerie());
-		editor.putInt(PREMIO2, loteriaNacional.getPremio2());
+		editor.putString(PREMIO2, loteriaNacional.getPremio2());
 		editor.putInt(REINTEGRO1, loteriaNacional.getReintegro1());
 		editor.putInt(REINTEGRO2, loteriaNacional.getReintegro2());
 		editor.putInt(REINTEGRO3, loteriaNacional.getReintegro3());
@@ -90,7 +90,7 @@ class LoteriaNacionalDB implements LotteryDB<LoteriaNacional> {
 				LoteriaNacional loteriaNacional = new LoteriaNacional(
 						dfm.parse(DateLotteries.formatDate( Long.toString(db.getLong(DATE, 0)))),
 						db.getInt(PREMIO1, 0), db.getInt(FRACCION, 0), db.getInt(SERIE,0),
-						db.getInt(PREMIO2, 0), db.getInt(REINTEGRO1, 0), db.getInt(REINTEGRO2, 0), 
+						db.getString(PREMIO2, ""), db.getInt(REINTEGRO1, 0), db.getInt(REINTEGRO2, 0),
 						db.getInt(REINTEGRO3, 0));
 
 				int numPremios = db.getInt(NUM_PREMIOS, 0);

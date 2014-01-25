@@ -37,7 +37,7 @@ class MockLotteryFetcher implements LotteryFetcher {
     listLottery.add(new Bonoloto(new Date(), 1, 2, 3, 4, 5, 6, 4, 3));
     listLottery.add(new Primitiva(new Date(), 1, 2, 3, 4, 5, 6, 4, 3));
     listLottery.add(new Lototurf(new Date(), 1, 2, 3, 4, 5, 6, 3, 4));
-    listLottery.add(new LoteriaNacional(new Date(), 1, 2, 3, 4, 5, 6, 3));
+    listLottery.add(new LoteriaNacional(new Date(), 1, 2, 3, "4", 5, 6, 3));
     listLottery.add(new Euromillon(new Date(), 6, 5, 2, 3, 1, 2, 1));
     listLottery.add(new GordoPrimitiva(new Date(), 6, 5, 2, 3, 1, 2));
     
@@ -201,7 +201,7 @@ class MockLotteryFetcher implements LotteryFetcher {
   @Override
   public List<LoteriaNacional> retrieveLastLoteriasNacionales(int start, int limit) {
     List<LoteriaNacional> listPrimitiva = new LinkedList<LoteriaNacional>();
-    listPrimitiva.add(new LoteriaNacional(new Date(), 1, 2, 3, 4, 5, 6, 3));
+    listPrimitiva.add(new LoteriaNacional(new Date(), 1, 2, 3, "", 5, 6, 3));
   
     simulateLatency();
     

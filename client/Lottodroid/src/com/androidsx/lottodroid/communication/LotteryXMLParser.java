@@ -1020,7 +1020,7 @@ class LotteryXMLParser {
 		NodeList results = game.getElementsByTagName("Premio");
 		Element result = (Element) results.item(3);
 		NamedNodeMap values = result.getAttributes();
-		int premio2 = Integer.parseInt(formatNumber(values.getNamedItem("NumeroPremiado").getNodeValue()));
+		String premio2 = values.getNamedItem("NumeroPremiado").getNodeValue();
 		
 		// 6 resultados: premio1, fraccion, serie, reintegro1,
 		// reintegro2, reintegro3
