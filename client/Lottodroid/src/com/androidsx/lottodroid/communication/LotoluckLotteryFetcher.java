@@ -23,6 +23,7 @@ import com.androidsx.lottodroid.model.Primitiva;
 import com.androidsx.lottodroid.model.Quiniela;
 import com.androidsx.lottodroid.model.Quinigol;
 import com.androidsx.lottodroid.model.QuintuplePlus;
+import com.androidsx.lottodroid.model.Trio;
 import com.androidsx.lottodroid.util.DateLotteries;
 
 public class LotoluckLotteryFetcher implements LotteryFetcher {
@@ -148,6 +149,11 @@ public class LotoluckLotteryFetcher implements LotteryFetcher {
 			Log.e("Lottodroid", "Could not retrieve last lototurf results", e);
 			throw new LotteryInfoUnavailableException(e);
 		}
+	}
+	
+	@Override
+	public List<Trio> retrieveLastTrio(int start, int limit) throws LotteryInfoUnavailableException {
+		throw new LotteryInfoUnavailableException();
 	}
 
 	@Override
@@ -293,6 +299,20 @@ public class LotoluckLotteryFetcher implements LotteryFetcher {
 			//String response = HttpRequestPerformer.getResponse(url, "UTF8");
 			
 			return LotteryXMLParser.parseLototurf(url);
+		} catch (Exception e) {
+			Log.e("Lottodroid", "Could not retrieve last lototurf results", e);
+			throw new LotteryInfoUnavailableException(e);
+		}
+	}
+	
+	@Override
+	public List<Trio> retrieveTrios(Long date)
+			throws LotteryInfoUnavailableException {
+		try {
+			String url = LotoluckLotteryFetcher.buildLotteryUrl(LotteryXMLParser.TRIO, date);
+			//String response = HttpRequestPerformer.getResponse(url, "UTF8");
+			
+			return LotteryXMLParser.parseTrio(url);
 		} catch (Exception e) {
 			Log.e("Lottodroid", "Could not retrieve last lototurf results", e);
 			throw new LotteryInfoUnavailableException(e);

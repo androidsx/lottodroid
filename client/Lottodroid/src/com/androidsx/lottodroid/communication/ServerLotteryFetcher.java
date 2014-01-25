@@ -23,6 +23,7 @@ import com.androidsx.lottodroid.model.Primitiva;
 import com.androidsx.lottodroid.model.Quiniela;
 import com.androidsx.lottodroid.model.Quinigol;
 import com.androidsx.lottodroid.model.QuintuplePlus;
+import com.androidsx.lottodroid.model.Trio;
 
 /**
  * Talks to the LottoDroid server to get the different lottery results.
@@ -283,6 +284,20 @@ public List<OnceFinde> retrieveOnceFinde(Long date)
 public List<QuintuplePlus> retrieveQuintuplePlus(Long date)
 		throws LotteryInfoUnavailableException {
 	// This method is just used when retrieve data from Lotoluck
+	return null;
+}
+
+@Override
+public List<Trio> retrieveLastTrio(int start, int limit)
+		throws LotteryInfoUnavailableException {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public List<Trio> retrieveTrios(Long date)
+		throws LotteryInfoUnavailableException {
+	// TODO Auto-generated method stub
 	return null;
 }
 

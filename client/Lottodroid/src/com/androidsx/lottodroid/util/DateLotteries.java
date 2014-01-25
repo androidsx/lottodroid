@@ -242,6 +242,11 @@ public class DateLotteries {
 
 		throw new LotteryInfoUnavailableException("Not supported yet");
 	}
+	
+	public static String getPreviousTrio(String date)
+			throws LotteryInfoUnavailableException {
+		throw new LotteryInfoUnavailableException("Not supported yet");
+	}
 
 	private static String oncePerWeek(String date, int dayOfWeek)
 			throws LotteryInfoUnavailableException {
