@@ -11,11 +11,9 @@ It provides up-to-date information about the following lotteries: Euromillón, B
 
 ### Server: JSON API
 
-The first version of Lottodroid uses an old-style JSON notreallyRESTful API, fetching daily all  the lottery information from the official API of the Spanish government ([Hacienda y administraciones públicas](http://www.minhap.gob.es/en-GB/Paginas/Home.aspx)) and saving it in a MySQL database.
+The first version of Lottodroid used an old-style JSON notreallyRESTful API, fetching daily all  the lottery information from the official API of the Spanish government ([Hacienda y administraciones públicas](http://www.minhap.gob.es/en-GB/Paginas/Home.aspx)) and saved it in a MySQL database. The backend was done in PHP and used a custom MVC mini-framework developed in-house. It's still here for historical reasons, mostly.
 
-The backend is done in PHP and it uses a custom MVC mini-framework developed in-house.
-
-Later in 2011, we partnered with [Lotoluck](http://lotoluck.com/) to get the lottery information from them, not using anymore our API.
+Later, in 2011, we partnered with [Lotoluck](http://lotoluck.com/) to get the lottery results from them instead.
 
 ## Screenshots
 
@@ -26,7 +24,7 @@ Later in 2011, we partnered with [Lotoluck](http://lotoluck.com/) to get the lot
 
 [![ScreenShot](https://github.com/androidsx/lottodroid/raw/master/img/youtube.png)](http://www.youtube.com/watch?v=AwKkB9oBpPU)
 
-
 ## Contributors
 
-The first version of 2009 was developed by [espinchi](github.com/espinchi) and [ompemi](github.com/ompemi), and in 2011 [hudomjo](https://github.com/hudomju) did a refactoring using Lotoluck as the lottery provider.
+The first version of 2009 was developed by [espinchi](github.com/espinchi) and [ompemi](github.com/ompemi), and in 2011 [hudomjo](https://github.com/hudomju) did a refactoring to switch to Lotoluck as our lottery result provider.
+
