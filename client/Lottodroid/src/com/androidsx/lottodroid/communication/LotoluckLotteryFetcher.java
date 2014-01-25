@@ -100,10 +100,9 @@ public class LotoluckLotteryFetcher implements LotteryFetcher {
 	public List<Quiniela> retrieveLastQuinielas(int start, int limit)
 			throws LotteryInfoUnavailableException {
 		try {
-			String url;
 			StringBuilder response = new StringBuilder();
 			do {
-			url = LotoluckLotteryFetcher.buildLotteryUrl(LotteryXMLParser.QUINIELA,
+			final String url = LotoluckLotteryFetcher.buildLotteryUrl(LotteryXMLParser.QUINIELA,
 					Long.parseLong(DateLotteries.getPreviousQuiniela(DateLotteries.getCurrentDate())));
 			response.append(HttpRequestPerformer.getResponse(url));
 			} while (++start < limit);
@@ -136,10 +135,9 @@ public class LotoluckLotteryFetcher implements LotteryFetcher {
 	public List<Lototurf> retrieveLastLototurfs(int start, int limit)
 			throws LotteryInfoUnavailableException {
 		try {
-			String url;
 			StringBuilder response = new StringBuilder();
 			do {
-			url = LotoluckLotteryFetcher.buildLotteryUrl(LotteryXMLParser.LOTOTURF,
+			final String url = LotoluckLotteryFetcher.buildLotteryUrl(LotteryXMLParser.LOTOTURF,
 					Long.parseLong(DateLotteries.getPreviousLotortuf((DateLotteries.getCurrentDate()))));
 			response.append(HttpRequestPerformer.getResponse(url));
 			} while (++start < limit);
@@ -191,10 +189,9 @@ public class LotoluckLotteryFetcher implements LotteryFetcher {
 	public List<Quinigol> retrieveLastQuinigoles(int start, int limit)
 			throws LotteryInfoUnavailableException {
 		try {
-			String url;
 			StringBuilder response = new StringBuilder();
 			do {
-			url = LotoluckLotteryFetcher.buildLotteryUrl(LotteryXMLParser.QUINIGOL, 
+			final String url = LotoluckLotteryFetcher.buildLotteryUrl(LotteryXMLParser.QUINIGOL, 
 					Long.parseLong(DateLotteries.getPreviousQuinigol(DateLotteries.getCurrentDate())));
 			response.append(HttpRequestPerformer.getResponse(url));
 			} while (++start < limit);
