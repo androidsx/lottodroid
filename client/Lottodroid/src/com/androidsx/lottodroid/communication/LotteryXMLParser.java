@@ -1097,9 +1097,9 @@ class LotteryXMLParser {
 				parsedValues[1] = value.split("-")[1];
 			}
 			
-			if(parsedValues[0] == "")
+			if("".equals(parsedValues[0]))
 				parsedValues[0] = " ";
-			if(parsedValues[1] == "")
+			if("".equals(parsedValues[1]))
 				parsedValues[1] = " ";
 
 			quinigol.setMatch(i, values.getNamedItem("Equipo1").getNodeValue(),
