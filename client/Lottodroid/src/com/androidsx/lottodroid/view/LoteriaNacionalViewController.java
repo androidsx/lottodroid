@@ -64,8 +64,7 @@ class LoteriaNacionalViewController implements LotteryViewController<LoteriaNaci
   private void fillUpView(View view, LoteriaNacional loterianacional) {
     ((TextView) view.findViewById(R.id.txtPremio1)).setText(Integer.toString(loterianacional
         .getPremio1()));
-    ((TextView) view.findViewById(R.id.txtPremio2)).setText(Integer.toString(loterianacional
-        .getPremio2()));
+    ((TextView) view.findViewById(R.id.txtPremio2)).setText(loterianacional.getPremio2());
     ((TextView) view.findViewById(R.id.txtFraccion)).setText(Integer.toString(loterianacional
         .getFraccion()));
     ((TextView) view.findViewById(R.id.txtSerie)).setText(Integer.toString(loterianacional
