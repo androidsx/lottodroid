@@ -12,7 +12,7 @@ public class LoteriaNacional extends BaseLottery {
 	private final int premio1;
 	private final int fraccion;
 	private final int serie;
-	private final int premio2;
+	private final String premio2;
 	private final int reintegro1;
 	private final int reintegro2;
 	private final int reintegro3;
@@ -90,7 +90,7 @@ public class LoteriaNacional extends BaseLottery {
 		return serie;
 	}
 
-	public int getPremio2() {
+	public String getPremio2() {
 		return premio2;
 	}
 

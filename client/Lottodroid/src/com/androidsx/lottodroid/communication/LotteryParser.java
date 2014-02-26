@@ -367,7 +367,7 @@ class LotteryParser {
 
       lotteryList.add(new LoteriaNacional(dfm.parse(item.getString("fecha")), "", 
           item.getInt("premio1"), item.getInt("fraccion"), item.getInt("serie"), 
-          item.getInt("premio2"), item.getInt("reintegro1"), item.getInt("reintegro2"), 
+          item.getString("premio2"), item.getInt("reintegro1"), item.getInt("reintegro2"),
           item.getInt("reintegro3")));  
     }
     

@@ -28,6 +28,8 @@ public class ViewControllerFactory {
       return new PrimitivaViewController(lotteryId.getName());
     } else if (lotteryId == LotteryId.LOTOTURF) {
       return new LototurfViewController(lotteryId.getName());
+    } else if (lotteryId == LotteryId.TRIO) {
+      return new TrioViewController(lotteryId.getName());
     } else if (lotteryId == LotteryId.QUINIGOL) {
       return new QuinigolViewController(lotteryId.getName());
     } else if (lotteryId == LotteryId.EUROMILLON) {

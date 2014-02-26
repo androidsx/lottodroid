@@ -37,6 +37,7 @@ import com.androidsx.lottodroid.model.Primitiva;
 import com.androidsx.lottodroid.model.Quiniela;
 import com.androidsx.lottodroid.model.Quinigol;
 import com.androidsx.lottodroid.model.QuintuplePlus;
+import com.androidsx.lottodroid.model.Trio;
 
 /**
  * Parser for the all the lottery draws ( bonoloto, quiniela, etc. ) retrieved
@@ -60,6 +61,7 @@ class LotteryXMLParser {
 	public static final int EUROMILLONES = 14;
 	public static final int COMBO = 15;
 	public static final int LOTOTURF = 16;
+	public static final int TRIO = 20;
 	public static final int QUINTUPLE_PLUS = 17;
 	public static final int QUINIGOL = 18;
 	public static final int LOTERIA_7_39 = 19;
@@ -322,6 +324,20 @@ class LotteryXMLParser {
 		}
 	}	
 	
+	public static List<Trio> parseTrio(String response)
+			throws LotteryParseException {
+
+		try {
+			return parseTrioData(parseContentTypeAndGetData(response,
+					TRIO));
+
+		} catch (DOMException e) {
+			throw new LotteryParseException("Error parsing content");
+		} catch (ParseException e) {
+			throw new LotteryParseException("Error parsing data");
+		}
+	}	
+	
 	/**
 	 * Parse the string containing the information of the last results of every
 	 * lottery draw and converts them into a list of {@link Lottery} value
@@ -403,6 +419,9 @@ class LotteryXMLParser {
 						break;
 					case QUINIGOL:
 						listLottery.add(parseQuinigolData(game).get(0));
+						break;
+					case TRIO:
+						listLottery.add(parseTrioData(game).get(0));
 						break;
 	
 					}
@@ -971,6 +990,39 @@ class LotteryXMLParser {
 
 		return lotteryList;
 	}
+	
+	private static List<Trio> parseTrioData(Element game)
+			throws DOMException, ParseException {
+
+		Date date = dfm.parse(formatDate(game.getElementsByTagName("Fecha").item(0).getFirstChild().getNodeValue()));
+		
+		int num[] = new int[3];
+		NodeList results = game.getElementsByTagName("Resultado");
+		NamedNodeMap values; Element result;
+		
+		for (int i = 0; i < results.getLength(); i++) {
+			result = (Element) results.item(i);
+			values = result.getAttributes();
+			num[i] = Integer.parseInt(formatNumber(values.getNamedItem("Valor").getNodeValue()));
+		}
+		
+		Trio trio = new Trio(date, num[0], num[1], num[2]);
+		
+		results = game.getElementsByTagName("Premio");
+
+		for (int i = 0; i < results.getLength(); i++) {
+			result = (Element) results.item(i);
+			values = result.getAttributes();
+			trio.addPremio(
+					values.getNamedItem("Categoria").getNodeValue(),
+					values.getNamedItem("ImporteEuros").getNodeValue());
+		}
+
+		List<Trio> lotteryList = new LinkedList<Trio>();
+		lotteryList.add(trio);
+
+		return lotteryList;
+	}
 
 	private static List<Euromillon> parseEuromillonData(Element game)
 			throws DOMException, ParseException {
@@ -1024,7 +1076,7 @@ class LotteryXMLParser {
 		NodeList results = game.getElementsByTagName("Premio");
 		Element result = (Element) results.item(3);
 		NamedNodeMap values = result.getAttributes();
-		int premio2 = Integer.parseInt(formatNumber(values.getNamedItem("NumeroPremiado").getNodeValue()));
+		String premio2 = values.getNamedItem("NumeroPremiado").getNodeValue();
 		
 		// 6 resultados: premio1, fraccion, serie, reintegro1,
 		// reintegro2, reintegro3

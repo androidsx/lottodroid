@@ -17,6 +17,7 @@ import com.androidsx.lottodroid.model.Primitiva;
 import com.androidsx.lottodroid.model.Quiniela;
 import com.androidsx.lottodroid.model.Quinigol;
 import com.androidsx.lottodroid.model.QuintuplePlus;
+import com.androidsx.lottodroid.model.Trio;
 
 /**
  * Fetches data about the lottery results.
@@ -106,5 +107,10 @@ public interface LotteryFetcher {
   
   /** @see {@link #retrieveBonolotos} */
   List<QuintuplePlus> retrieveQuintuplePlus(Long date) throws LotteryInfoUnavailableException;
+
+  /** @see {@link #retrieveBonolotos} */
+  List<Trio> retrieveLastTrio(int start, int limit) throws LotteryInfoUnavailableException;
+
+  List<Trio> retrieveTrios(Long date) throws LotteryInfoUnavailableException;
 
 }

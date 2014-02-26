@@ -151,6 +151,8 @@ public class PrizeActivity extends Activity {
 						listLottery = dataFetcher.retrieveOnceFinde(date);
 					} else if (lotteryId == LotteryId.QUINTUPLE_PLUS) {
 						listLottery = dataFetcher.retrieveQuintuplePlus(date);
+					} else if (lotteryId == LotteryId.TRIO) {
+						listLottery = dataFetcher.retrieveTrios(date);
 					} else {
 						// TODO(pablo): check this exception handling
 						throw new DataFormatException();
