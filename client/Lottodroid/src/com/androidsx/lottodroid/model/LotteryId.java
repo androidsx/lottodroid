@@ -18,7 +18,8 @@ public enum LotteryId {
   LOTTO6_49("Loto Catalunya 6/49"),
   QUINIGOL("Quinigol"),
   LOTOTURF("Lototurf"),
-  QUINTUPLE_PLUS("Quíntuple plus");
+  QUINTUPLE_PLUS("Quíntuple plus"),
+  TRIO("Trio");
   
   private final String name;
   
