@@ -6,13 +6,14 @@ import java.util.Date;
 /**
  * Results for a Once Finde draw
  */
-public class OnceFinde implements Lottery {
+public class OnceFinde extends BaseLottery {
 	private final Date date;
 	private final String num; 
 	private final String serie;
 	private ArrayList<Premio> premios = new ArrayList<Premio>();
 
-	public OnceFinde(Date date, String num, String serie) {
+	public OnceFinde(Date date, String htmlLink, String num, String serie) {
+		super(htmlLink);
 		this.date = date;
 		this.num = num;
 		this.serie = serie;

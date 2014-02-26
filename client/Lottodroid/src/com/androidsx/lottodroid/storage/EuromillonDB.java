@@ -22,6 +22,7 @@ class EuromillonDB implements LotteryDB<Euromillon> {
 	private static final String EUROMILLON_FILE = "Euromillon";
 
 	private static final String DATE = "date";
+	private static final String HTML_LINK = "htmlLink";
 	private static final String NUM1 = "num1";
 	private static final String NUM2 = "num2";
 	private static final String NUM3 = "num3";
@@ -61,6 +62,7 @@ class EuromillonDB implements LotteryDB<Euromillon> {
 
 		editor.putLong(DATE,
 				DateFormatter.toLotoluckString(euromillon.getDate()));
+		editor.putString(HTML_LINK, euromillon.getHtmlLink());
 		editor.putInt(NUM1, euromillon.getNum1());
 		editor.putInt(NUM2, euromillon.getNum2());
 		editor.putInt(NUM3, euromillon.getNum3());
@@ -93,6 +95,7 @@ class EuromillonDB implements LotteryDB<Euromillon> {
 
 				Euromillon euromillon = new Euromillon(
 						dfm.parse(DateLotteries.formatDate( Long.toString(db.getLong(DATE, 0)))),
+						db.getString(HTML_LINK, ""),
 						db.getInt(NUM1, 0), db.getInt(NUM2, 0), db.getInt(NUM3,0),
 						db.getInt(NUM4, 0), db.getInt(NUM5, 0), db.getInt(ESTRELLA1, 0), 
 						db.getInt(ESTRELLA2, 0));

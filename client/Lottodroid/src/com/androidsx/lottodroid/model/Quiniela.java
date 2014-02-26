@@ -7,7 +7,7 @@ import java.util.Date;
  * Results for a Quiniela draw.
  * 
  */
-public class Quiniela implements FootballLotery {
+public class Quiniela extends BaseLottery implements FootballLotery {
 
 	public static final int NUM_MATCHES = 15;
 	
@@ -22,7 +22,8 @@ public class Quiniela implements FootballLotery {
 
 	private final Date date;
 
-	public Quiniela(Date date) {
+	public Quiniela(Date date, String htmlLink) {
+		super(htmlLink);
 		this.date = date;
 	}
 

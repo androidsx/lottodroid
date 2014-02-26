@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * Results for a Quintuple Plus draw
  */
-public class QuintuplePlus implements Lottery {
+public class QuintuplePlus extends BaseLottery {
 	private final Date date;
 	private final int race1;
 	private final int race2;
@@ -16,8 +16,9 @@ public class QuintuplePlus implements Lottery {
 	private final int race5_2;
 	private ArrayList<Premio> premios = new ArrayList<Premio>();
 
-	public QuintuplePlus(Date date, int race1, int race2, int race3, int race4,
+	public QuintuplePlus(Date date, String htmlLink, int race1, int race2, int race3, int race4,
 			int race5, int race5_2) {
+		super(htmlLink);
 		this.date = date;
 		this.race1 = race1;
 		this.race2 = race2;

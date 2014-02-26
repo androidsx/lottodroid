@@ -22,6 +22,7 @@ class CuponazoOnceDB implements LotteryDB<CuponazoOnce> {
 	private static final String CUPONAZO_ONCE_FILE = "CuponazoOnce";
 
 	private static final String DATE = "date";
+	private static final String HTML_LINK = "htmlLink";
 	private static final String NUM = "num";
 	private static final String SERIE = "seri";
 	private static final String SERIE_ADICIO = "seriadicio";
@@ -55,6 +56,7 @@ class CuponazoOnceDB implements LotteryDB<CuponazoOnce> {
 
 		editor.putLong(DATE,
 				DateFormatter.toLotoluckString(cuponazoOnce.getDate()));
+		editor.putString(HTML_LINK, cuponazoOnce.getHtmlLink());
 		editor.putString(NUM, cuponazoOnce.getNum());
 		editor.putString(SERIE, cuponazoOnce.getSerie());
 		editor.putString(SERIE_ADICIO, cuponazoOnce.getSeriesAdicionales());
@@ -81,6 +83,7 @@ class CuponazoOnceDB implements LotteryDB<CuponazoOnce> {
 
 				CuponazoOnce cuponazoOnce = new CuponazoOnce(
 						dfm.parse(DateLotteries.formatDate( Long.toString(db.getLong(DATE, 0)))),
+						db.getString(HTML_LINK, ""),
 						db.getString(NUM, ""), db.getString(SERIE, ""), db.getString(SERIE_ADICIO, ""));
 
 				int numPremios = db.getInt(NUM_PREMIOS, 0);

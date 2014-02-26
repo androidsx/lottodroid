@@ -6,14 +6,15 @@ import java.util.Date;
 /**
  * Results for a Cuponazo Once draw
  */
-public class CuponazoOnce implements Lottery {
+public class CuponazoOnce extends BaseLottery {
 	private final Date date;
 	private final String num; 
 	private final String serie; 
 	private final String series_adicio;
 	private ArrayList<Premio> premios = new ArrayList<Premio>();
 
-	public CuponazoOnce(Date date, String num, String serie, String series_adicio) {
+	public CuponazoOnce(Date date, String htmlLink, String num, String serie, String series_adicio) {
+		super(htmlLink);
 		this.date = date;
 		this.num = num;
 		this.serie = serie;

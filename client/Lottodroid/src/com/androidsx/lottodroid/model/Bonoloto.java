@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * Results for a Bonoloto draw
  */
-public class Bonoloto implements Lottery {
+public class Bonoloto extends BaseLottery {
 	private final Date date;
 	private final int num1;
 	private final int num2;
@@ -18,8 +18,9 @@ public class Bonoloto implements Lottery {
 	private final int complementario;
 	private ArrayList<Premio> premios = new ArrayList<Premio>();
 
-	public Bonoloto(Date date, int num1, int num2, int num3, int num4,
+	public Bonoloto(Date date, String htmlLink, int num1, int num2, int num3, int num4,
 			int num5, int num6, int reintegro, int complementario) {
+		super(htmlLink);
 		this.date = date;
 		this.num1 = num1;
 		this.num2 = num2;

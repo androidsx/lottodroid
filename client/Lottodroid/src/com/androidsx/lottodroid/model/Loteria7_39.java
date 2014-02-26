@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * Results for a Loteria 7/39 de la Once draw
  */
-public class Loteria7_39 implements Lottery {
+public class Loteria7_39 extends BaseLottery {
 	private final Date date;
 	private final int num1;
 	private final int num2;
@@ -18,8 +18,9 @@ public class Loteria7_39 implements Lottery {
 	private final int reintegro;
 	private ArrayList<Premio> premios = new ArrayList<Premio>();
 
-	public Loteria7_39(Date date, int num1, int num2, int num3, int num4,
+	public Loteria7_39(Date date, String htmlLink, int num1, int num2, int num3, int num4,
 			int num5, int num6, int num7, int reintegro) {
+		super(htmlLink);
 		this.date = date;
 		this.num1 = num1;
 		this.num2 = num2;

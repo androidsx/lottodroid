@@ -249,7 +249,7 @@ class LotteryParser {
     for (int i = 0; i < numItems; i++) {
       JSONObject item = jsonContent.getJSONObject(i);
 
-      lotteryList.add(new Bonoloto(dfm.parse(item.getString("fecha")), 
+      lotteryList.add(new Bonoloto(dfm.parse(item.getString("fecha")), "", 
           item.getInt("num1"), item.getInt("num2"), item.getInt("num3"), 
           item.getInt("num4"), item.getInt("num5"), item.getInt("num6"), 
           item.getInt("reintegro"), item.getInt("complementario")));  
@@ -267,7 +267,7 @@ class LotteryParser {
     for (int i = 0; i < numItems; i++) {
       JSONObject item = jsonContent.getJSONObject(i);
 
-      lotteryList.add(new GordoPrimitiva(dfm.parse(item.getString("fecha")), 
+      lotteryList.add(new GordoPrimitiva(dfm.parse(item.getString("fecha")), "", 
           item.getInt("num1"), item.getInt("num2"), item.getInt("num3"), 
           item.getInt("num4"), item.getInt("num5"),  
           item.getInt("reintegro")));  
@@ -284,7 +284,7 @@ class LotteryParser {
 
     for (int i = 0; i < numItems; i++) {
       JSONObject item = jsonContent.getJSONObject(i);
-      Quiniela quiniela = new Quiniela(dfm.parse(item.getString("fecha")));
+      Quiniela quiniela = new Quiniela(dfm.parse(item.getString("fecha")), "");
       
       JSONArray results = item.getJSONArray("results");
       int numResults = results.length();
@@ -311,7 +311,7 @@ class LotteryParser {
     for (int i = 0; i < numItems; i++) {
       JSONObject item = jsonContent.getJSONObject(i);
 
-      lotteryList.add(new Primitiva(dfm.parse(item.getString("fecha")), 
+      lotteryList.add(new Primitiva(dfm.parse(item.getString("fecha")), "", 
           item.getInt("num1"), item.getInt("num2"), item.getInt("num3"), 
           item.getInt("num4"), item.getInt("num5"), item.getInt("num6"), 
           item.getInt("reintegro"), item.getInt("complementario")));  
@@ -329,7 +329,7 @@ class LotteryParser {
     for (int i = 0; i < numItems; i++) {
       JSONObject item = jsonContent.getJSONObject(i);
 
-      lotteryList.add(new Lototurf(dfm.parse(item.getString("fecha")), 
+      lotteryList.add(new Lototurf(dfm.parse(item.getString("fecha")), "", 
           item.getInt("num1"), item.getInt("num2"), item.getInt("num3"), 
           item.getInt("num4"), item.getInt("num5"), item.getInt("num6"), 
           item.getInt("caballoGanador"), item.getInt("reintegro")));  
@@ -347,7 +347,7 @@ class LotteryParser {
     for (int i = 0; i < numItems; i++) {
       JSONObject item = jsonContent.getJSONObject(i);
 
-      lotteryList.add(new Euromillon(dfm.parse(item.getString("fecha")), 
+      lotteryList.add(new Euromillon(dfm.parse(item.getString("fecha")), "", 
           item.getInt("num1"), item.getInt("num2"), item.getInt("num3"), 
           item.getInt("num4"), item.getInt("num5"), item.getInt("estrella1"), 
           item.getInt("estrella2")));  
@@ -365,7 +365,7 @@ class LotteryParser {
     for (int i = 0; i < numItems; i++) {
       JSONObject item = jsonContent.getJSONObject(i);
 
-      lotteryList.add(new LoteriaNacional(dfm.parse(item.getString("fecha")), 
+      lotteryList.add(new LoteriaNacional(dfm.parse(item.getString("fecha")), "", 
           item.getInt("premio1"), item.getInt("fraccion"), item.getInt("serie"), 
           item.getInt("premio2"), item.getInt("reintegro1"), item.getInt("reintegro2"), 
           item.getInt("reintegro3")));  
@@ -382,7 +382,7 @@ class LotteryParser {
 
     for (int i = 0; i < numItems; i++) {
       JSONObject item = jsonContent.getJSONObject(i);
-      Quinigol quinigol = new Quinigol(dfm.parse(item.getString("fecha")));
+      Quinigol quinigol = new Quinigol(dfm.parse(item.getString("fecha")), "");
       
       JSONArray results = item.getJSONArray("results");
       int numResults = results.length();

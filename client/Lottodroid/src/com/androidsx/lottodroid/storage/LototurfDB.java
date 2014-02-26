@@ -22,6 +22,7 @@ class LototurfDB implements LotteryDB<Lototurf> {
 	private static final String LOTOTURF_FILE = "Lototurf";
 
 	private static final String DATE = "date";
+	private static final String HTML_LINK = "htmlLink";
 	private static final String NUM1 = "num1";
 	private static final String NUM2 = "num2";
 	private static final String NUM3 = "num3";
@@ -62,6 +63,7 @@ class LototurfDB implements LotteryDB<Lototurf> {
 
 		editor.putLong(DATE,
 				DateFormatter.toLotoluckString(lotortuf.getDate()));
+		editor.putString(HTML_LINK, lotortuf.getHtmlLink());
 		editor.putInt(NUM1, lotortuf.getNum1());
 		editor.putInt(NUM2, lotortuf.getNum2());
 		editor.putInt(NUM3, lotortuf.getNum3());
@@ -94,6 +96,7 @@ class LototurfDB implements LotteryDB<Lototurf> {
 
 				Lototurf lotortuf = new Lototurf(
 						dfm.parse(DateLotteries.formatDate( Long.toString(db.getLong(DATE, 0)))),
+						db.getString(HTML_LINK, ""),
 						db.getInt(NUM1, 0), db.getInt(NUM2, 0), db.getInt(NUM3,0),
 						db.getInt(NUM4, 0), db.getInt(NUM5, 0), db.getInt(NUM6, 0), 
 						db.getInt(CABALLO_GANADOR, 0), db.getInt(REINTEGRO, 0));

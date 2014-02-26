@@ -22,6 +22,7 @@ class QuintuplePlusDB implements LotteryDB<QuintuplePlus> {
 	private static final String QUINTUPLE_PLUS_FILE = "QuintuplePlus";
 
 	private static final String DATE = "date";
+	private static final String HTML_LINK = "htmlLink";
 	private static final String RACE1 = "race1";
 	private static final String RACE2 = "race2";
 	private static final String RACE3 = "race3";
@@ -59,6 +60,7 @@ class QuintuplePlusDB implements LotteryDB<QuintuplePlus> {
 
 		editor.putLong(DATE,
 				DateFormatter.toLotoluckString(quintuplePlus.getDate()));
+		editor.putString(HTML_LINK, quintuplePlus.getHtmlLink());
 		editor.putInt(RACE1, quintuplePlus.getRace1());
 		editor.putInt(RACE2, quintuplePlus.getRace2());
 		editor.putInt(RACE3, quintuplePlus.getRace3());
@@ -89,6 +91,7 @@ class QuintuplePlusDB implements LotteryDB<QuintuplePlus> {
 
 				QuintuplePlus quintuplePlus = new QuintuplePlus(
 						dfm.parse(DateLotteries.formatDate( Long.toString(db.getLong(DATE, 0)))),
+						db.getString(HTML_LINK, ""),
 						db.getInt(RACE1, 0), db.getInt(RACE2, 0), db.getInt(RACE3,0),
 						db.getInt(RACE4, 0), db.getInt(RACE5, 0), db.getInt(RACE5_2, 0));
 

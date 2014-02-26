@@ -22,6 +22,7 @@ class Lotto6_49DB implements LotteryDB<Lotto6_49> {
 	private static final String LOTTO6_49_FILE = "Lotto649";
 
 	private static final String DATE = "date";
+	private static final String HTML_LINK = "htmlLink";
 	private static final String NUM1 = "num1";
 	private static final String NUM2 = "num2";
 	private static final String NUM3 = "num3";
@@ -62,6 +63,7 @@ class Lotto6_49DB implements LotteryDB<Lotto6_49> {
 
 		editor.putLong(DATE,
 				DateFormatter.toLotoluckString(lotto6_49.getDate()));
+		editor.putString(HTML_LINK, lotto6_49.getHtmlLink());
 		editor.putInt(NUM1, lotto6_49.getNum1());
 		editor.putInt(NUM2, lotto6_49.getNum2());
 		editor.putInt(NUM3, lotto6_49.getNum3());
@@ -95,6 +97,7 @@ class Lotto6_49DB implements LotteryDB<Lotto6_49> {
 
 				Lotto6_49 lotto6_49 = new Lotto6_49(
 						dfm.parse(DateLotteries.formatDate( Long.toString(db.getLong(DATE, 0)))),
+						db.getString(HTML_LINK, ""),
 						db.getInt(NUM1, 0), db.getInt(NUM2, 0), db.getInt(NUM3,0),
 						db.getInt(NUM4, 0), db.getInt(NUM5, 0), db.getInt(NUM6, 0), 
 						db.getInt(REINTEGRO, 0), db.getInt(COMPLEMENTARIO, 0), 

@@ -22,6 +22,7 @@ class BonolotoDB implements LotteryDB<Bonoloto> {
 	private static final String BONOLOTO_FILE = "Bonoloto";
 
 	private static final String DATE = "date";
+	private static final String HTML_LINK = "htmlLink";
 	private static final String NUM1 = "num1";
 	private static final String NUM2 = "num2";
 	private static final String NUM3 = "num3";
@@ -61,6 +62,7 @@ class BonolotoDB implements LotteryDB<Bonoloto> {
 
 		editor.putLong(DATE,
 				DateFormatter.toLotoluckString(bonoloto.getDate()));
+		editor.putString(HTML_LINK, bonoloto.getHtmlLink());
 		editor.putInt(NUM1, bonoloto.getNum1());
 		editor.putInt(NUM2, bonoloto.getNum2());
 		editor.putInt(NUM3, bonoloto.getNum3());
@@ -100,6 +102,7 @@ class BonolotoDB implements LotteryDB<Bonoloto> {
 				
 				Bonoloto bonoloto = new Bonoloto(
 						dfm.parse(DateLotteries.formatDate( Long.toString(db.getLong(DATE, 0)))),
+						db.getString(HTML_LINK, ""),
 						db.getInt(NUM1, 0), db.getInt(NUM2, 0), db.getInt(NUM3,0),
 						db.getInt(NUM4, 0), db.getInt(NUM5, 0), db.getInt(NUM6, 0), 
 						db.getInt(REINTEGRO, 0), db.getInt(COMPLEMENTARIO, 0));

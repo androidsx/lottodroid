@@ -22,6 +22,7 @@ class OnceDB implements LotteryDB<Once> {
 	private static final String ONCE_FILE = "Once";
 
 	private static final String DATE = "date";
+	private static final String HTML_LINK = "htmlLink";
 	private static final String NUM = "num";
 	private static final String SERIE = "seri";
 
@@ -54,6 +55,7 @@ class OnceDB implements LotteryDB<Once> {
 
 		editor.putLong(DATE,
 				DateFormatter.toLotoluckString(once.getDate()));
+		editor.putString(HTML_LINK, once.getHtmlLink());
 		editor.putString(NUM, once.getNum());
 		editor.putString(SERIE, once.getSerie());
 		
@@ -78,6 +80,7 @@ class OnceDB implements LotteryDB<Once> {
 			if (isYear && isMonth && isDay && isHour) {
 				Once once = new Once(
 						dfm.parse(DateLotteries.formatDate( Long.toString(db.getLong(DATE, 0)))),
+						db.getString(HTML_LINK, ""),
 						db.getString(NUM, ""), db.getString(SERIE, ""));
 				int numPremios = db.getInt(NUM_PREMIOS, 0);
 				for (int i = 0; i < numPremios; i++)
