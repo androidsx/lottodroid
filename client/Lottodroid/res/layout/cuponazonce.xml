@@ -6,14 +6,30 @@
 	<LinearLayout android:orientation="horizontal"
 		android:layout_width="wrap_content" android:layout_height="wrap_content">
 
-		<TextView android:text=" Número:" android:padding="5dip"
-			android:textColor="#fee" />
-		<TextView android:id="@+id/txtNumber" android:paddingRight="15dip"
+		<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+			android:textColor="#fee"
+            android:text=" Número:"/>
+		<TextView
+            android:id="@+id/txtNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="15dip"
 			android:text="OOPS" />
 
-		<TextView android:text="Serie:" android:padding="5dip"
-			android:textColor="#fee" />
-		<TextView android:id="@+id/txtSerie" android:paddingRight="15dip"
+		<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+			android:textColor="#fee"
+            android:text="Serie:" />
+		<TextView
+            android:id="@+id/txtSerie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="15dip"
 			android:text="OOPS" />
 
 	</LinearLayout>
@@ -21,9 +37,16 @@
 	<LinearLayout android:orientation="horizontal"
 		android:layout_width="wrap_content" android:layout_height="wrap_content">
 
-		<TextView android:text="Series Adicionales:" android:padding="5dip"
-			android:textColor="#fee" />
-		<TextView android:id="@+id/txtSeriesAdicionales"
+		<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+			android:textColor="#fee"
+            android:text="Series Adicionales:" />
+		<TextView
+            android:id="@+id/txtSeriesAdicionales"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 			android:text="OOPS" />
 
 	</LinearLayout>

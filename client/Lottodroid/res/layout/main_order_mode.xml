@@ -19,7 +19,6 @@
   <!-- otherwise it won't let the buttons appear in a long web page -->
   <LinearLayout
     android:id="@+id/webviewParent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
