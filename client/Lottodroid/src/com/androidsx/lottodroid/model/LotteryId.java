@@ -17,9 +17,13 @@ public enum LotteryId {
   ONCE_FINDE("ONCE Fin de semana"),
   LOTTO6_49("Loto Catalunya 6/49"),
   QUINIGOL("Quinigol"),
-  LOTOTURF("Lototurf"),
+  CUPON_EXTRAORDINARIO("Cupón Extraordinario"),
+  TRIO("Trio"),
+  EURO_JACKPOT("Eurojackpot"),
   QUINTUPLE_PLUS("Quíntuple plus"),
-  TRIO("Trio");
+  SUPER_ONCE("Super Once"),
+  LOTOTURF("Lototurf"),
+  SUPER_10("Super 10");
   
   private final String name;
   

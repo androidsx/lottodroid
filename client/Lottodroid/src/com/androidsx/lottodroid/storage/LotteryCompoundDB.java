@@ -21,6 +21,7 @@ import com.androidsx.lottodroid.model.Primitiva;
 import com.androidsx.lottodroid.model.Quiniela;
 import com.androidsx.lottodroid.model.Quinigol;
 import com.androidsx.lottodroid.model.QuintuplePlus;
+import com.androidsx.lottodroid.model.SuperOnce;
 
 public final class LotteryCompoundDB<K extends Lottery> {
 	
@@ -41,6 +42,7 @@ public final class LotteryCompoundDB<K extends Lottery> {
 			lotteries.add(LotteryDBFactory.newLotteryDB(context, LotteryId.QUINIGOL).retrieveLottery().get(0));
 			lotteries.add(LotteryDBFactory.newLotteryDB(context, LotteryId.LOTOTURF).retrieveLottery().get(0));
 			lotteries.add(LotteryDBFactory.newLotteryDB(context, LotteryId.QUINTUPLE_PLUS).retrieveLottery().get(0));
+			lotteries.add(LotteryDBFactory.newLotteryDB(context, LotteryId.SUPER_ONCE).retrieveLottery().get(0));
 			return lotteries;
 		} catch (Exception e) {
 			return null;
@@ -78,6 +80,8 @@ public final class LotteryCompoundDB<K extends Lottery> {
 				new QuinigolDB(context).storeLottery((Quinigol)lottery);
 			} else if(LotteryId.QUINTUPLE_PLUS == lottery.getId()) {
 				new QuintuplePlusDB(context).storeLottery((QuintuplePlus)lottery);
+			} else if(LotteryId.SUPER_ONCE == lottery.getId()) {
+				new SuperOnceDB(context).storeLottery((SuperOnce)lottery);
 			}
 		}
 	}

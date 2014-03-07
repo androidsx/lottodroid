@@ -107,9 +107,9 @@ public class ScoresActivity extends Activity {
 				LotteryId lotteryId = viewController.getId();
 				
 				try {
-					if(!update) // Try to get the data from the database
-						listLottery = LotteryDBFactory.newLotteryDB(ScoresActivity.this, lotteryId).retrieveLottery();
-					else
+					//if(!update) // Try to get the data from the database
+					//	listLottery = LotteryDBFactory.newLotteryDB(ScoresActivity.this, lotteryId).retrieveLottery();
+				//	else
 						throw new Exception("We throw an exception to update results");
 				}  catch (Exception e) {
 					// No lottery stored or out of date, fetch it from Internet

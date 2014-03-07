@@ -306,8 +306,8 @@ public class Lottodroid extends ListActivity {
       try {
     	List<Lottery> lotteries = null;
     	// Try to get the data from the database
-    	if(!update)
-    		lotteries = LotteryCompoundDB.retrieveLotteries(Lottodroid.this);
+    	//if(!update)
+    	//	lotteries = LotteryCompoundDB.retrieveLotteries(Lottodroid.this);
     	// If there's no data or it's out of date, fetch it from Internet
     	if(lotteries == null) {
 	    	LotteryFetcher dataFetcher = LotteryFetcherFactory.newLotteryFetcher(Lottodroid.this);

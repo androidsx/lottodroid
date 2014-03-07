@@ -1,5 +1,7 @@
 package com.androidsx.lottodroid.view;
 
+import android.util.Log;
+
 import com.androidsx.lottodroid.model.Lottery;
 import com.androidsx.lottodroid.model.LotteryId;
 
@@ -50,6 +52,14 @@ public class ViewControllerFactory {
         return new OnceFindeViewController(lotteryId.getName());
     } else if (lotteryId == LotteryId.QUINTUPLE_PLUS) {
         return new QuintuplePlusViewController(lotteryId.getName());
+    } else if (lotteryId == LotteryId.CUPON_EXTRAORDINARIO) {
+        return new CuponExtraordinarioViewController(lotteryId.getName());
+    } else if (lotteryId == LotteryId.EURO_JACKPOT) {
+        return new EurojackpotViewController(lotteryId.getName());
+    } else if (lotteryId == LotteryId.SUPER_ONCE) {
+        return new SuperOnceViewController(lotteryId.getName());
+    } else if (lotteryId == LotteryId.SUPER_10) {
+        return new Super10ViewController(lotteryId.getName());
     } else {
       throw new IllegalStateException();
     }

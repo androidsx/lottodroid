@@ -9,7 +9,9 @@ import android.util.Log;
 
 import com.androidsx.lottodroid.Lottodroid;
 import com.androidsx.lottodroid.model.Bonoloto;
+import com.androidsx.lottodroid.model.CuponExtraordinario;
 import com.androidsx.lottodroid.model.CuponazoOnce;
+import com.androidsx.lottodroid.model.Eurojackpot;
 import com.androidsx.lottodroid.model.Euromillon;
 import com.androidsx.lottodroid.model.GordoPrimitiva;
 import com.androidsx.lottodroid.model.Loteria7_39;
@@ -23,12 +25,14 @@ import com.androidsx.lottodroid.model.Primitiva;
 import com.androidsx.lottodroid.model.Quiniela;
 import com.androidsx.lottodroid.model.Quinigol;
 import com.androidsx.lottodroid.model.QuintuplePlus;
+import com.androidsx.lottodroid.model.Super10;
+import com.androidsx.lottodroid.model.SuperOnce;
 import com.androidsx.lottodroid.model.Trio;
 import com.androidsx.lottodroid.util.DateLotteries;
 
 public class LotoluckLotteryFetcher implements LotteryFetcher {
 
-	static final String URL_STRING = "http://lotoluck.com/utils/lotoluck_en_xml.php?username=DroidSX&password=";
+	static final String URL_STRING = "http://lotoluck.com/utils/lotoluck_en_xml.php?username=DroidSX&password=pablOmar";
 	static final String DATE_VAR = "&fecha=";
 	static final String LOTTERY_VAR = "&juego=";
 	static final String LIMIT_VAR = "&limit=";
@@ -204,6 +208,76 @@ public class LotoluckLotteryFetcher implements LotteryFetcher {
 			return LotteryXMLParser.parseQuinigol(response.toString());
 		} catch (Exception e) {
 			Log.e("Lottodroid", "Could not retrieve last quinigol results", e);
+			throw new LotteryInfoUnavailableException(e);
+		}
+	}
+	
+
+	
+	@Override
+	public List<CuponExtraordinario> retrieveLastCuponExtraordinarios(int start, int limit)
+			throws LotteryInfoUnavailableException {
+		try {
+			StringBuilder response = new StringBuilder();
+			do {
+			final String url = LotoluckLotteryFetcher.buildLotteryUrl(LotteryXMLParser.CUPON_EXTRAORDINARIO, 
+					Long.parseLong(DateLotteries.getPreviousBonoloto(DateLotteries.getCurrentDate())));
+			response.append(HttpRequestPerformer.getResponse(url));
+			} while (++start < limit);
+			return LotteryXMLParser.parseCuponExtraordinario(response.toString());
+		} catch (Exception e) {
+			Log.e("Lottodroid", "Could not retrieve last CuponExtraordinario results", e);
+			throw new LotteryInfoUnavailableException(e);
+		}
+	}
+	
+	@Override
+	public List<Eurojackpot> retrieveEurojackpots(int start, int limit)
+			throws LotteryInfoUnavailableException {
+		try {
+			StringBuilder response = new StringBuilder();
+			do {
+			final String url = LotoluckLotteryFetcher.buildLotteryUrl(LotteryXMLParser.EURO_JACKPOT, 
+					Long.parseLong(DateLotteries.getPreviousBonoloto(DateLotteries.getCurrentDate())));
+			response.append(HttpRequestPerformer.getResponse(url));
+			} while (++start < limit);
+			return LotteryXMLParser.parseEurojackpot(response.toString());
+		} catch (Exception e) {
+			Log.e("Lottodroid", "Could not retrieve last Eurojackpot results", e);
+			throw new LotteryInfoUnavailableException(e);
+		}
+	}
+	
+	@Override
+	public List<SuperOnce> retrieveLastSuperOnces(int start, int limit)
+			throws LotteryInfoUnavailableException {
+		try {
+			StringBuilder response = new StringBuilder();
+			do {
+			final String url = LotoluckLotteryFetcher.buildLotteryUrl(LotteryXMLParser.SUPER_ONCE, 
+					Long.parseLong(DateLotteries.getPreviousBonoloto(DateLotteries.getCurrentDate())));
+			response.append(HttpRequestPerformer.getResponse(url));
+			} while (++start < limit);
+			return LotteryXMLParser.parseSuperOnce(response.toString());
+		} catch (Exception e) {
+			Log.e("Lottodroid", "Could not retrieve last SuperOnce results", e);
+			throw new LotteryInfoUnavailableException(e);
+		}
+	}
+	
+	@Override
+	public List<Super10> retrieveLastSuper10s(int start, int limit)
+			throws LotteryInfoUnavailableException {
+		try {
+			StringBuilder response = new StringBuilder();
+			do {
+			final String url = LotoluckLotteryFetcher.buildLotteryUrl(LotteryXMLParser.SUPER_10, 
+					Long.parseLong(DateLotteries.getPreviousBonoloto(DateLotteries.getCurrentDate())));
+			response.append(HttpRequestPerformer.getResponse(url));
+			} while (++start < limit);
+			return LotteryXMLParser.parseSuper10(response.toString());
+		} catch (Exception e) {
+			Log.e("Lottodroid", "Could not retrieve last Super10 results", e);
 			throw new LotteryInfoUnavailableException(e);
 		}
 	}
@@ -438,6 +512,64 @@ public class LotoluckLotteryFetcher implements LotteryFetcher {
 			return LotteryXMLParser.parseQuintuplePlus(url);
 		} catch (Exception e) {
 			Log.e("Lottodroid", "Could not retrieve last QuintuplePlus results", e);
+			throw new LotteryInfoUnavailableException(e);
+		}
+	}
+	
+
+	
+	@Override
+	public List<CuponExtraordinario> retrieveCuponExtraordinario(Long date)
+			throws LotteryInfoUnavailableException {
+		try {
+			String url = LotoluckLotteryFetcher.buildLotteryUrl(LotteryXMLParser.CUPON_EXTRAORDINARIO, date);
+			//String response = HttpRequestPerformer.getResponse(url, "UTF8");
+			
+			return LotteryXMLParser.parseCuponExtraordinario(url);
+		} catch (Exception e) {
+			Log.e("Lottodroid", "Could not retrieve last CuponExtraordinario results", e);
+			throw new LotteryInfoUnavailableException(e);
+		}
+	}
+	
+	@Override
+	public List<Eurojackpot> retrieveEurojackpot(Long date)
+			throws LotteryInfoUnavailableException {
+		try {
+			String url = LotoluckLotteryFetcher.buildLotteryUrl(LotteryXMLParser.EURO_JACKPOT, date);
+			//String response = HttpRequestPerformer.getResponse(url, "UTF8");
+			
+			return LotteryXMLParser.parseEurojackpot(url);
+		} catch (Exception e) {
+			Log.e("Lottodroid", "Could not retrieve last eurojackpot results", e);
+			throw new LotteryInfoUnavailableException(e);
+		}
+	}
+	
+	@Override
+	public List<SuperOnce> retrieveSuperOnce(Long date)
+			throws LotteryInfoUnavailableException {
+		try {
+			String url = LotoluckLotteryFetcher.buildLotteryUrl(LotteryXMLParser.SUPER_ONCE, date);
+			//String response = HttpRequestPerformer.getResponse(url, "UTF8");
+			
+			return LotteryXMLParser.parseSuperOnce(url);
+		} catch (Exception e) {
+			Log.e("Lottodroid", "Could not retrieve last SuperOnce results", e);
+			throw new LotteryInfoUnavailableException(e);
+		}
+	}
+	
+	@Override
+	public List<Super10> retrieveSuper10(Long date)
+			throws LotteryInfoUnavailableException {
+		try {
+			String url = LotoluckLotteryFetcher.buildLotteryUrl(LotteryXMLParser.SUPER_10, date);
+			//String response = HttpRequestPerformer.getResponse(url, "UTF8");
+			
+			return LotteryXMLParser.parseSuper10(url);
+		} catch (Exception e) {
+			Log.e("Lottodroid", "Could not retrieve last Super10 results", e);
 			throw new LotteryInfoUnavailableException(e);
 		}
 	}
