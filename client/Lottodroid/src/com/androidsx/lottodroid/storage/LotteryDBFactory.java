@@ -21,6 +21,7 @@ public final class LotteryDBFactory {
 	private static QuinielaDB quinielaDB;
 	private static QuinigolDB quinigolDB;
 	private static QuintuplePlusDB quintuplePlusDB;
+	private static SuperOnceDB superOnceDB;
 	
 	private LotteryDBFactory() {
 		
@@ -84,7 +85,11 @@ public final class LotteryDBFactory {
 			if(quintuplePlusDB == null)
 				quintuplePlusDB = new QuintuplePlusDB(context);
 			return quintuplePlusDB;
-		} 
+		} else if(LotteryId.SUPER_ONCE == lotteryId) {
+			if(superOnceDB == null)
+				superOnceDB = new SuperOnceDB(context);
+			return superOnceDB;
+		}
 		return null;
 	}
 

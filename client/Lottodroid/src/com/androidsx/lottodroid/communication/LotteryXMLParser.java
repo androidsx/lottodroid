@@ -23,7 +23,9 @@ import org.xml.sax.SAXException;
 import android.util.Log;
 
 import com.androidsx.lottodroid.model.Bonoloto;
+import com.androidsx.lottodroid.model.CuponExtraordinario;
 import com.androidsx.lottodroid.model.CuponazoOnce;
+import com.androidsx.lottodroid.model.Eurojackpot;
 import com.androidsx.lottodroid.model.Euromillon;
 import com.androidsx.lottodroid.model.GordoPrimitiva;
 import com.androidsx.lottodroid.model.Loteria7_39;
@@ -37,6 +39,8 @@ import com.androidsx.lottodroid.model.Primitiva;
 import com.androidsx.lottodroid.model.Quiniela;
 import com.androidsx.lottodroid.model.Quinigol;
 import com.androidsx.lottodroid.model.QuintuplePlus;
+import com.androidsx.lottodroid.model.Super10;
+import com.androidsx.lottodroid.model.SuperOnce;
 import com.androidsx.lottodroid.model.Trio;
 
 /**
@@ -65,7 +69,11 @@ class LotteryXMLParser {
 	public static final int QUINTUPLE_PLUS = 17;
 	public static final int QUINIGOL = 18;
 	public static final int LOTERIA_7_39 = 19;
-	
+	public static final int CUPON_EXTRAORDINARIO = 23;
+	public static final int EURO_JACKPOT = 27;
+	public static final int SUPER_ONCE = 22;
+	public static final int SUPER_10 = 21;
+
 	/**
 	 * Field inside the {@code Juego} tag of every item that contains an HTML
 	 * link that corresponds to {@link Lottery#getHtmlLink()}.
@@ -338,6 +346,63 @@ class LotteryXMLParser {
 		}
 	}	
 	
+
+	public static List<CuponExtraordinario> parseCuponExtraordinario(String response)
+			throws LotteryParseException {
+
+		try {
+			return parseCuponExtraordinarioData(parseContentTypeAndGetData(response,
+					CUPON_EXTRAORDINARIO));
+
+		} catch (DOMException e) {
+			throw new LotteryParseException("Error parsing content");
+		} catch (ParseException e) {
+			throw new LotteryParseException("Error parsing data");
+		}
+	}	
+	
+	public static List<Eurojackpot> parseEurojackpot(String response)
+			throws LotteryParseException {
+
+		try {
+			return parseEurojackpotData(parseContentTypeAndGetData(response,
+					EURO_JACKPOT));
+
+		} catch (DOMException e) {
+			throw new LotteryParseException("Error parsing content");
+		} catch (ParseException e) {
+			throw new LotteryParseException("Error parsing data");
+		}
+	}	
+	
+	public static List<SuperOnce> parseSuperOnce(String response)
+			throws LotteryParseException {
+
+		try {
+			return parseSuperOnceData(parseContentTypeAndGetData(response,
+					SUPER_ONCE));
+
+		} catch (DOMException e) {
+			throw new LotteryParseException("Error parsing content");
+		} catch (ParseException e) {
+			throw new LotteryParseException("Error parsing data");
+		}
+	}	
+	
+	public static List<Super10> parseSuper10(String response)
+			throws LotteryParseException {
+
+		try {
+			return parseSuper10Data(parseContentTypeAndGetData(response,
+					SUPER_10));
+
+		} catch (DOMException e) {
+			throw new LotteryParseException("Error parsing content");
+		} catch (ParseException e) {
+			throw new LotteryParseException("Error parsing data");
+		}
+	}	
+	
 	/**
 	 * Parse the string containing the information of the last results of every
 	 * lottery draw and converts them into a list of {@link Lottery} value
@@ -422,6 +487,18 @@ class LotteryXMLParser {
 						break;
 					case TRIO:
 						listLottery.add(parseTrioData(game).get(0));
+						break;
+					case CUPON_EXTRAORDINARIO: 
+						listLottery.add(parseCuponExtraordinarioData(game).get(0));
+						break;
+					case EURO_JACKPOT:
+						listLottery.add(parseEurojackpotData(game).get(0));
+						break;
+					case SUPER_ONCE:
+						listLottery.add(parseSuperOnceData(game).get(0));
+						break;
+					case SUPER_10:
+						listLottery.add(parseSuper10Data(game).get(0));
 						break;
 	
 					}
@@ -1244,7 +1321,7 @@ class LotteryXMLParser {
 	
 		return lotteryList;
 	}
-	
+
 	/** @see #FIELD_HTML_LINK */
 	private static String extractHtmlLink(Element game) {
 		final NodeList htmlLinkNode = game.getElementsByTagName(FIELD_HTML_LINK);
@@ -1257,9 +1334,115 @@ class LotteryXMLParser {
 		}
 		return htmlLink;
 	}
+
+	
+	private static List<CuponExtraordinario> parseCuponExtraordinarioData(Element game)
+			throws DOMException, ParseException {
+
+		Date date = dfm.parse(formatDate(game.getElementsByTagName("Fecha").item(0).getFirstChild().getNodeValue()));
+		
+		int num[] = new int[3];
+		NodeList results = game.getElementsByTagName("Resultado");
+		NamedNodeMap values; Element result;
+		
+		for (int i = 0; i < results.getLength(); i++) {
+			result = (Element) results.item(i);
+			values = result.getAttributes();
+			num[i] = Integer.parseInt(formatNumber(values.getNamedItem("Valor").getNodeValue()));
+		}
+		
+		CuponExtraordinario trio = new CuponExtraordinario(date, num[0], "" + num[1]);
+		
+		List<CuponExtraordinario> lotteryList = new LinkedList<CuponExtraordinario>();
+		lotteryList.add(trio);
+
+		return lotteryList;
+	}
+	
+	private static List<Eurojackpot> parseEurojackpotData(Element game)
+			throws DOMException, ParseException {
+
+		Date date = dfm.parse(formatDate(game.getElementsByTagName("Fecha").item(0).getFirstChild().getNodeValue()));
+		System.out.println("\n\nEurojackpot:  " + date);
+
+		// 8 results: 6 nums + caballoGanador + reintegro
+		int num[] = new int[8];
+		NodeList results = game.getElementsByTagName("Resultado");
+		NamedNodeMap values; Element result;
+		
+		for (int i = 0; i < results.getLength(); i++) {
+			result = (Element) results.item(i);
+			values = result.getAttributes();
+			num[i] = Integer.parseInt(formatNumber(values.getNamedItem("Valor").getNodeValue()));
+		}
+		
+		Eurojackpot lototurf = new Eurojackpot(date, num[0], num[1], num[2], num[3],
+				num[4], num[5], num[6]);
+		
+		List<Eurojackpot> lotteryList = new LinkedList<Eurojackpot>();
+		lotteryList.add(lototurf);
+
+		return lotteryList;
+	}
+	
+	private static List<SuperOnce> parseSuperOnceData(Element game)
+			throws DOMException, ParseException {
+
+		Date date = dfm.parse(formatDate(game.getElementsByTagName("Fecha").item(0).getFirstChild().getNodeValue()));
+		System.out.println("\n\nSuperOnce:  " + date);
+
+		NodeList results = game.getElementsByTagName("Resultado");
+		NamedNodeMap values; Element result;
+		
+		StringBuilder numbers = new StringBuilder();
+		for (int i = 0; i < results.getLength(); i++) {
+			result = (Element) results.item(i);
+			values = result.getAttributes();
+			numbers.append(values.getNamedItem("Valor").getNodeValue() + " ");
+			
+			if ((i + 1) % 5 == 0) {
+				numbers.append("\n");
+			}
+		}
+		
+		SuperOnce lototurf = new SuperOnce(date, numbers.toString());
+		
+		List<SuperOnce> lotteryList = new LinkedList<SuperOnce>();
+		lotteryList.add(lototurf);
+
+		return lotteryList;
+	}
+	
+	private static List<Super10> parseSuper10Data(Element game)
+			throws DOMException, ParseException {
+
+		Date date = dfm.parse(formatDate(game.getElementsByTagName("Fecha").item(0).getFirstChild().getNodeValue()));
+		System.out.println("\n\nSuper10:  " + date);
+
+		NodeList results = game.getElementsByTagName("Resultado");
+		NamedNodeMap values; Element result;
+		
+		StringBuilder numbers = new StringBuilder();
+		for (int i = 0; i < results.getLength(); i++) {
+			result = (Element) results.item(i);
+			values = result.getAttributes();
+			numbers.append(values.getNamedItem("Valor").getNodeValue() + " ");
+			
+			if ((i + 1) % 5 == 0) {
+				numbers.append("\n");
+			}
+		}
+		
+		Super10 lototurf = new Super10(date, numbers.toString());
+		
+		List<Super10> lotteryList = new LinkedList<Super10>();
+		lotteryList.add(lototurf);
+
+		return lotteryList;
+	}
 	
 	/** Parse strings which contains numbers such as 10.343 and 10,233 */
 	private static String formatNumber(String number) {
-		return number.trim().replace(".", "").replace(",", ".");
+		return number.trim().replace(".", "").replace(",", ".").replace("-", "0");
 	}
 }

@@ -3,7 +3,9 @@ package com.androidsx.lottodroid.communication;
 import java.util.List;
 
 import com.androidsx.lottodroid.model.Bonoloto;
+import com.androidsx.lottodroid.model.CuponExtraordinario;
 import com.androidsx.lottodroid.model.CuponazoOnce;
+import com.androidsx.lottodroid.model.Eurojackpot;
 import com.androidsx.lottodroid.model.Euromillon;
 import com.androidsx.lottodroid.model.GordoPrimitiva;
 import com.androidsx.lottodroid.model.Loteria7_39;
@@ -17,6 +19,8 @@ import com.androidsx.lottodroid.model.Primitiva;
 import com.androidsx.lottodroid.model.Quiniela;
 import com.androidsx.lottodroid.model.Quinigol;
 import com.androidsx.lottodroid.model.QuintuplePlus;
+import com.androidsx.lottodroid.model.Super10;
+import com.androidsx.lottodroid.model.SuperOnce;
 import com.androidsx.lottodroid.model.Trio;
 
 /**
@@ -112,5 +116,30 @@ public interface LotteryFetcher {
   List<Trio> retrieveLastTrio(int start, int limit) throws LotteryInfoUnavailableException;
 
   List<Trio> retrieveTrios(Long date) throws LotteryInfoUnavailableException;
+
+	List<Super10> retrieveSuper10(Long date)
+			throws LotteryInfoUnavailableException;
+
+	List<SuperOnce> retrieveSuperOnce(Long date)
+			throws LotteryInfoUnavailableException;
+
+	List<Eurojackpot> retrieveEurojackpot(Long date)
+			throws LotteryInfoUnavailableException;
+
+	List<Super10> retrieveLastSuper10s(int start, int limit)
+			throws LotteryInfoUnavailableException;
+
+	List<SuperOnce> retrieveLastSuperOnces(int start, int limit)
+			throws LotteryInfoUnavailableException;
+
+	List<Eurojackpot> retrieveEurojackpots(int start, int limit)
+			throws LotteryInfoUnavailableException;
+
+	List<CuponExtraordinario> retrieveLastCuponExtraordinarios(int start,
+			int limit) throws LotteryInfoUnavailableException;
+
+	
+	List<CuponExtraordinario> retrieveCuponExtraordinario(Long date)
+			throws LotteryInfoUnavailableException;
 
 }
