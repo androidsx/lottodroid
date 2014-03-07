@@ -92,6 +92,8 @@ class Loteria7_39ViewController implements LotteryViewController<Loteria7_39> {
 	LinearLayout rows = (LinearLayout) awards.findViewById(R.id.premio_list_row);
 	View layoutView;
 	
+	ViewHelper.setHtmlLink(lottery, awards);
+	
 	for(int index = 0; index < lottery.getNumPremios(); index++) {
 	
 	    layoutView = View.inflate(context, R.layout.premio_row, null);

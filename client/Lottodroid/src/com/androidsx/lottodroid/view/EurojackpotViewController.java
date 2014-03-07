@@ -94,6 +94,8 @@ class EurojackpotViewController implements LotteryViewController<Eurojackpot> {
 		View layoutView;
 		awards.findViewById(R.id.premios_title).setVisibility(View.GONE);
 		
+		ViewHelper.setHtmlLink(lottery, awards);
+		
 		for(int index = 0; index < lottery.getNumPremios(); index++) {
 		
 		    layoutView = View.inflate(context, R.layout.premio_row, null);

@@ -88,6 +88,8 @@ class CuponExtraordinarioViewController implements LotteryViewController<CuponEx
 	LinearLayout rows = (LinearLayout) awards.findViewById(R.id.premio_list_row);
 	View layoutView;
 	
+	ViewHelper.setHtmlLink(lottery, awards);
+	
 	awards.findViewById(R.id.premios_title).setVisibility(View.GONE);
 	
 	for(int index = 0; index < lottery.getNumPremios(); index++) {

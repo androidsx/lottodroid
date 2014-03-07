@@ -88,7 +88,7 @@ class SuperOnceViewController implements LotteryViewController<SuperOnce> {
 	View layoutView;
 	
 	awards.findViewById(R.id.premios_title).setVisibility(View.GONE);
-	
+	ViewHelper.setHtmlLink(lottery, awards);
 	for(int index = 0; index < lottery.getNumPremios(); index++) {
 	
 	    layoutView = View.inflate(context, R.layout.premio_once_row, null);

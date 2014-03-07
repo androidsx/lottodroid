@@ -78,7 +78,7 @@ class LotteryXMLParser {
 	 * Field inside the {@code Juego} tag of every item that contains an HTML
 	 * link that corresponds to {@link Lottery#getHtmlLink()}.
 	 */
-	private static final String FIELD_HTML_LINK = "Enlace";
+	private static final String FIELD_HTML_LINK = "enlace";
 
 	private static final DateFormat dfm = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -1327,7 +1327,7 @@ class LotteryXMLParser {
 		final NodeList htmlLinkNode = game.getElementsByTagName(FIELD_HTML_LINK);
 		final String htmlLink;
 		if (htmlLinkNode.getLength() >= 1) {
-			htmlLink = htmlLinkNode.item(0).getNodeValue();
+			htmlLink = htmlLinkNode.item(0).getFirstChild().getNodeValue();
 		} else {
 			htmlLink = "";
 			Log.w(TAG, "Can't find the tag \"" + FIELD_HTML_LINK + "\"");
