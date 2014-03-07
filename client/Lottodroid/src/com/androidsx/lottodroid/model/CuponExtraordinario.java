@@ -6,13 +6,14 @@ import java.util.Date;
 /**
  * Results for a Lototurf draw
  */
-public class CuponExtraordinario implements Lottery {
+public class CuponExtraordinario extends BaseLottery {
 	private final Date date;
 	private final int num1;
 	private final String num2;
 	private ArrayList<Premio> premios = new ArrayList<Premio>();
 
-	public CuponExtraordinario(Date date, int num1, String num2) {
+	public CuponExtraordinario(Date date,  String htmlLink, int num1, String num2) {
+		super(htmlLink);
 		this.date = date;
 		this.num1 = num1;
 		this.num2 = num2;

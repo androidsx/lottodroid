@@ -22,6 +22,7 @@ class LoteriaNacionalDB implements LotteryDB<LoteriaNacional> {
 	private static final String LOTERIA_NACIONAL_FILE = "LoteriaNacionala";
 
 	private static final String DATE = "date";
+	private static final String HTML_LINK = "htmlLink";
 	private static final String PREMIO1 = "premio1";
 	private static final String FRACCION = "fraccion";
 	private static final String SERIE = "serie";
@@ -59,6 +60,7 @@ class LoteriaNacionalDB implements LotteryDB<LoteriaNacional> {
 
 		editor.putLong(DATE,
 				DateFormatter.toLotoluckString(loteriaNacional.getDate()));
+		editor.putString(HTML_LINK, loteriaNacional.getHtmlLink());
 		editor.putInt(PREMIO1, loteriaNacional.getPremio1());
 		editor.putInt(FRACCION, loteriaNacional.getFraccion());
 		editor.putInt(SERIE, loteriaNacional.getSerie());
@@ -89,6 +91,7 @@ class LoteriaNacionalDB implements LotteryDB<LoteriaNacional> {
 
 				LoteriaNacional loteriaNacional = new LoteriaNacional(
 						dfm.parse(DateLotteries.formatDate( Long.toString(db.getLong(DATE, 0)))),
+						db.getString(HTML_LINK, ""),
 						db.getInt(PREMIO1, 0), db.getInt(FRACCION, 0), db.getInt(SERIE,0),
 						db.getString(PREMIO2, ""), db.getInt(REINTEGRO1, 0), db.getInt(REINTEGRO2, 0),
 						db.getInt(REINTEGRO3, 0));

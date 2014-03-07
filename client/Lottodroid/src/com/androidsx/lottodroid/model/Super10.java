@@ -6,12 +6,13 @@ import java.util.Date;
 /**
  * Results for a Lototurf draw
  */
-public class Super10 implements Lottery {
+public class Super10  extends BaseLottery {
 	private final Date date;
 	private final String result;
 	private ArrayList<Premio> premios = new ArrayList<Premio>();
 
-	public Super10(Date date, String result) {
+	public Super10(Date date,  String htmlLink, String result) {
+		super(htmlLink);
 		this.date = date;
 		this.result = result;
 	}

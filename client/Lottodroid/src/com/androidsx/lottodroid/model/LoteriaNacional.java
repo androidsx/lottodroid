@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * Results for a Loteria nacional draw
  */
-public class LoteriaNacional implements Lottery {
+public class LoteriaNacional extends BaseLottery {
 
 	private final Date date;
 	private final int premio1;
@@ -18,8 +18,9 @@ public class LoteriaNacional implements Lottery {
 	private final int reintegro3;
 	private ArrayList<Premio> premios = new ArrayList<Premio>();
 
-	public LoteriaNacional(Date date, int premio1, int fraccion, int serie,
+	public LoteriaNacional(Date date, String htmlLink, int premio1, int fraccion, int serie,
 			String premio2, int reintegro1, int reintegro2, int reintegro3) {
+		super(htmlLink);
 		this.date = date;
 		this.premio1 = premio1;
 		this.fraccion = fraccion;

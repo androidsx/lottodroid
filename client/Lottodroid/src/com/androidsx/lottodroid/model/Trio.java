@@ -6,14 +6,15 @@ import java.util.Date;
 /**
  * Results for a Trio draw
  */
-public class Trio implements Lottery {
+public class Trio  extends BaseLottery {
 	private final Date date;
 	private final int num1;
 	private final int num2;
 	private final int num3;
 	private ArrayList<Premio> premios = new ArrayList<Premio>();
 
-	public Trio(Date date, int num1, int num2, int num3) {
+	public Trio(Date date, String htmlLink, int num1, int num2, int num3) {
+		super(htmlLink);
 		this.date = date;
 		this.num1 = num1;
 		this.num2 = num2;

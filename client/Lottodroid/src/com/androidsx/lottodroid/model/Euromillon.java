@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * Results for a Euromillon draw
  */
-public class Euromillon implements Lottery {
+public class Euromillon extends BaseLottery {
 	private final Date date;
 	private final int num1;
 	private final int num2;
@@ -17,8 +17,9 @@ public class Euromillon implements Lottery {
 	private final int estrella2;
 	private ArrayList<Premio> premios = new ArrayList<Premio>();
 
-	public Euromillon(Date date, int num1, int num2, int num3, int num4,
+	public Euromillon(Date date, String htmlLink, int num1, int num2, int num3, int num4,
 			int num5, int estrella1, int estrella2) {
+		super(htmlLink);
 		this.date = date;
 		this.num1 = num1;
 		this.num2 = num2;

@@ -50,8 +50,6 @@ import com.androidsx.lottodroid.model.Trio;
  * Convert the information into {@link Lottery} value objects
  */
 class LotteryXMLParser {
-    
-    
     private static final String TAG = "LotteryXMLParser";
 
 	public static final int SORTEOS = 0;
@@ -75,6 +73,12 @@ class LotteryXMLParser {
 	public static final int EURO_JACKPOT = 27;
 	public static final int SUPER_ONCE = 22;
 	public static final int SUPER_10 = 21;
+
+	/**
+	 * Field inside the {@code Juego} tag of every item that contains an HTML
+	 * link that corresponds to {@link Lottery#getHtmlLink()}.
+	 */
+	private static final String FIELD_HTML_LINK = "enlace";
 
 	private static final DateFormat dfm = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -601,7 +605,7 @@ class LotteryXMLParser {
 			System.out.print(num[i] + " ");
 		}
 		
-		Bonoloto bonoloto = new Bonoloto(date, num[0], num[1], num[2], num[3],
+		Bonoloto bonoloto = new Bonoloto(date, extractHtmlLink(game), num[0], num[1], num[2], num[3],
 				num[4], num[5], num[7], num[6]);
 		
 		results = game.getElementsByTagName("Premio");
@@ -651,7 +655,7 @@ class LotteryXMLParser {
 		
 		System.out.print("Num: " + num + "Serie: " + serie + "Series adicionales: " + series_adicio);
 		
-		CuponazoOnce cuponazoOnce = new CuponazoOnce(date, num, serie, series_adicio);
+		CuponazoOnce cuponazoOnce = new CuponazoOnce(date, extractHtmlLink(game), num, serie, series_adicio);
 		
 		results = game.getElementsByTagName("Premio");
 
@@ -711,7 +715,7 @@ class LotteryXMLParser {
 			System.out.print(num[i] + " ");
 		}
 		
-		GordoPrimitiva gordoPrimitiva = new GordoPrimitiva(date, num[0],
+		GordoPrimitiva gordoPrimitiva = new GordoPrimitiva(date, extractHtmlLink(game), num[0],
 				num[1], num[2], num[3], num[4], num[5]);
 		
 		results = game.getElementsByTagName("Premio");
@@ -750,7 +754,7 @@ class LotteryXMLParser {
 			System.out.print(num[i] + " ");
 		}
 		
-		Loteria7_39 loteria7_39 = new Loteria7_39(date, num[0], num[1], num[2], num[3],
+		Loteria7_39 loteria7_39 = new Loteria7_39(date, extractHtmlLink(game), num[0], num[1], num[2], num[3],
 				num[4], num[5], num[6], num[7]);
 		
 		results = game.getElementsByTagName("Premio");
@@ -796,7 +800,7 @@ class LotteryXMLParser {
 			}
 		}
 		
-		Lotto6_49 lotto6_49 = new Lotto6_49(date, num[0], num[1], num[2], num[3],
+		Lotto6_49 lotto6_49 = new Lotto6_49(date, extractHtmlLink(game), num[0], num[1], num[2], num[3],
 				num[4], num[5], num[6], num[7], joker);
 		
 		results = game.getElementsByTagName("Premio");
@@ -839,7 +843,7 @@ class LotteryXMLParser {
 		
 		System.out.print("Num: " + num + "  Serie: " + serie);
 		
-		Once once = new Once(date, num, serie);
+		Once once = new Once(date, extractHtmlLink(game), num, serie);
 		
 		results = game.getElementsByTagName("Premio");
      
@@ -888,7 +892,7 @@ class LotteryXMLParser {
 		
 		System.out.print("Num: " + num + "  Serie: " + serie);
 		
-		OnceFinde onceFinde = new OnceFinde(date, num, serie);
+		OnceFinde onceFinde = new OnceFinde(date, extractHtmlLink(game), num, serie);
 		
 		results = game.getElementsByTagName("Premio");
 		String categorias[] = { "A las cinco cifras y serie (durante 25 a\u00F1os)",
@@ -925,7 +929,7 @@ class LotteryXMLParser {
 
 		Date date = dfm.parse(formatDate(game.getElementsByTagName("Fecha").item(0).getFirstChild().getNodeValue()));
 
-		Quiniela quiniela = new Quiniela(date);
+		Quiniela quiniela = new Quiniela(date, extractHtmlLink(game));
 		System.out.println("\n\nQuiniela:  " + date);
 
 		NodeList results = game.getElementsByTagName("Resultado");
@@ -997,7 +1001,7 @@ class LotteryXMLParser {
 			num[i] = Integer.parseInt(formatNumber(values.getNamedItem("Valor").getNodeValue()));
 		}
 		
-		Primitiva primitiva = new Primitiva(date, num[0], num[1], num[2],
+		Primitiva primitiva = new Primitiva(date, extractHtmlLink(game), num[0], num[1], num[2],
 				num[3], num[4], num[5], num[8], num[6]);
 		
 		results = game.getElementsByTagName("Premio");
@@ -1042,7 +1046,7 @@ class LotteryXMLParser {
 			System.out.print(num[i] + " ");
 		}
 		
-		Lototurf lototurf = new Lototurf(date, num[0], num[1], num[2], num[3],
+		Lototurf lototurf = new Lototurf(date, extractHtmlLink(game), num[0], num[1], num[2], num[3],
 				num[4], num[5], num[6], num[7]);
 		
 		results = game.getElementsByTagName("Premio");
@@ -1079,7 +1083,7 @@ class LotteryXMLParser {
 			num[i] = Integer.parseInt(formatNumber(values.getNamedItem("Valor").getNodeValue()));
 		}
 		
-		Trio trio = new Trio(date, num[0], num[1], num[2]);
+		Trio trio = new Trio(date, extractHtmlLink(game), num[0], num[1], num[2]);
 		
 		results = game.getElementsByTagName("Premio");
 
@@ -1115,7 +1119,7 @@ class LotteryXMLParser {
 			System.out.print(num[i] + " ");
 		}
 		
-		Euromillon euromillon = new Euromillon(date, num[0], num[1], num[2],
+		Euromillon euromillon = new Euromillon(date, extractHtmlLink(game), num[0], num[1], num[2],
 				num[3], num[4], num[5], num[6]);
 		
 		results = game.getElementsByTagName("Premio");
@@ -1177,7 +1181,7 @@ class LotteryXMLParser {
 			System.out.print(num[i] + " ");
 		}
 
-		LoteriaNacional loteriaNacional = new LoteriaNacional(date, num[0],
+		LoteriaNacional loteriaNacional = new LoteriaNacional(date, extractHtmlLink(game), num[0],
 				num[1], num[2], premio2, num[3], num[4], num[5]);
 		
 		results = game.getElementsByTagName("Premio");
@@ -1209,7 +1213,7 @@ class LotteryXMLParser {
 			throws DOMException, ParseException {
 
 		Date date = dfm.parse(formatDate(game.getElementsByTagName("Fecha").item(0).getFirstChild().getNodeValue()));
-		Quinigol quinigol = new Quinigol(date);
+		Quinigol quinigol = new Quinigol(date, extractHtmlLink(game));
 		System.out.println("\n\nQuinigol:  " + date);
 
 		NodeList results = game.getElementsByTagName("Resultado");
@@ -1296,7 +1300,7 @@ class LotteryXMLParser {
 			System.out.print(races[i] + " ");
 		}
 		
-		QuintuplePlus quintuplePlus = new QuintuplePlus(date, races[0], races[1], races[2],
+		QuintuplePlus quintuplePlus = new QuintuplePlus(date, extractHtmlLink(game), races[0], races[1], races[2],
 				races[3], races[4], races[5]);
 		
 		results = game.getElementsByTagName("Premio");
@@ -1318,6 +1322,19 @@ class LotteryXMLParser {
 		return lotteryList;
 	}
 
+	/** @see #FIELD_HTML_LINK */
+	private static String extractHtmlLink(Element game) {
+		final NodeList htmlLinkNode = game.getElementsByTagName(FIELD_HTML_LINK);
+		final String htmlLink;
+		if (htmlLinkNode.getLength() >= 1) {
+			htmlLink = htmlLinkNode.item(0).getFirstChild().getNodeValue();
+		} else {
+			htmlLink = "";
+			Log.w(TAG, "Can't find the tag \"" + FIELD_HTML_LINK + "\"");
+		}
+		return htmlLink;
+	}
+
 	
 	private static List<CuponExtraordinario> parseCuponExtraordinarioData(Element game)
 			throws DOMException, ParseException {
@@ -1334,7 +1351,7 @@ class LotteryXMLParser {
 			num[i] = Integer.parseInt(formatNumber(values.getNamedItem("Valor").getNodeValue()));
 		}
 		
-		CuponExtraordinario trio = new CuponExtraordinario(date, num[0], "" + num[1]);
+		CuponExtraordinario trio = new CuponExtraordinario(date, extractHtmlLink(game), num[0], "" + num[1]);
 		
 		List<CuponExtraordinario> lotteryList = new LinkedList<CuponExtraordinario>();
 		lotteryList.add(trio);
@@ -1359,7 +1376,7 @@ class LotteryXMLParser {
 			num[i] = Integer.parseInt(formatNumber(values.getNamedItem("Valor").getNodeValue()));
 		}
 		
-		Eurojackpot lototurf = new Eurojackpot(date, num[0], num[1], num[2], num[3],
+		Eurojackpot lototurf = new Eurojackpot(date, extractHtmlLink(game), num[0], num[1], num[2], num[3],
 				num[4], num[5], num[6]);
 		
 		List<Eurojackpot> lotteryList = new LinkedList<Eurojackpot>();
@@ -1388,7 +1405,7 @@ class LotteryXMLParser {
 			}
 		}
 		
-		SuperOnce lototurf = new SuperOnce(date, numbers.toString());
+		SuperOnce lototurf = new SuperOnce(date, extractHtmlLink(game), numbers.toString());
 		
 		List<SuperOnce> lotteryList = new LinkedList<SuperOnce>();
 		lotteryList.add(lototurf);
@@ -1416,7 +1433,7 @@ class LotteryXMLParser {
 			}
 		}
 		
-		Super10 lototurf = new Super10(date, numbers.toString());
+		Super10 lototurf = new Super10(date, extractHtmlLink(game), numbers.toString());
 		
 		List<Super10> lotteryList = new LinkedList<Super10>();
 		lotteryList.add(lototurf);

@@ -76,6 +76,11 @@ public class QuinielaScoresView {
 	public Date getDate() {
 		return new Date();
 	}
+	
+	@Override
+	public String getHtmlLink() {
+		return "";
+	}
 
 	@Override
 	public int getNumMatches() {

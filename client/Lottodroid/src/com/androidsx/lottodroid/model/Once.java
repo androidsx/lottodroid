@@ -6,13 +6,14 @@ import java.util.Date;
 /**
  * Results for a Once draw
  */
-public class Once implements Lottery {
+public class Once extends BaseLottery {
 	private final Date date;
 	private final String num; 
 	private final String serie;
 	private ArrayList<Premio> premios = new ArrayList<Premio>();
 
-	public Once(Date date, String num, String serie) {
+	public Once(Date date, String htmlLink, String num, String serie) {
+		super(htmlLink);
 		this.date = date;
 		this.num = num;
 		this.serie = serie;

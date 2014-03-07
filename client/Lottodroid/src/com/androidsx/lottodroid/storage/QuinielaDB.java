@@ -24,6 +24,7 @@ class QuinielaDB implements LotteryDB<Quiniela> {
 	public static final int NUM_MATCHES = 15;
 
 	private static final String DATE = "date";
+	private static final String HTML_LINK = "htmlLink";
 	private static final String HOME_TEAM = "ht";
 	private static final String AWAY_TEAM = "at";
 	private static final String RESULT = "result";
@@ -60,6 +61,7 @@ class QuinielaDB implements LotteryDB<Quiniela> {
 
 		editor.putLong(DATE,
 				DateFormatter.toLotoluckString(quiniela.getDate()));
+		editor.putString(HTML_LINK, quiniela.getHtmlLink());
 		for(int matchNumber = 0; matchNumber < NUM_MATCHES; matchNumber++) {
 			editor.putString(HOME_TEAM + matchNumber, quiniela.getHomeTeam(matchNumber));
 			editor.putString(AWAY_TEAM + matchNumber, quiniela.getAwayTeam(matchNumber));
@@ -90,7 +92,8 @@ class QuinielaDB implements LotteryDB<Quiniela> {
 			if (isYear && isMonth && isDay && isHour) {
 
 				Quiniela quiniela = new Quiniela(
-						dfm.parse(DateLotteries.formatDate( Long.toString(db.getLong(DATE, 0)))));
+						dfm.parse(DateLotteries.formatDate( Long.toString(db.getLong(DATE, 0)))),
+						db.getString(HTML_LINK, ""));
 				
 				for(int matchNumber = 0; matchNumber < NUM_MATCHES; matchNumber++) {
 					quiniela.setMatch(matchNumber, db.getString(HOME_TEAM + matchNumber, ""), 

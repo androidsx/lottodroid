@@ -22,6 +22,7 @@ class GordoPrimitivaDB implements LotteryDB<GordoPrimitiva> {
 	private static final String GORDO_PRIMITIVA_FILE = "GordoPrimitiva";
 
 	private static final String DATE = "date";
+	private static final String HTML_LINK = "htmlLink";
 	private static final String NUM1 = "num1";
 	private static final String NUM2 = "num2";
 	private static final String NUM3 = "num3";
@@ -59,6 +60,7 @@ class GordoPrimitivaDB implements LotteryDB<GordoPrimitiva> {
 
 		editor.putLong(DATE,
 				DateFormatter.toLotoluckString(gordoPrimitiva.getDate()));
+		editor.putString(HTML_LINK, gordoPrimitiva.getHtmlLink());
 		editor.putInt(NUM1, gordoPrimitiva.getNum1());
 		editor.putInt(NUM2, gordoPrimitiva.getNum2());
 		editor.putInt(NUM3, gordoPrimitiva.getNum3());
@@ -89,6 +91,7 @@ class GordoPrimitivaDB implements LotteryDB<GordoPrimitiva> {
 
 				GordoPrimitiva gordoPrimitiva = new GordoPrimitiva(
 						dfm.parse(DateLotteries.formatDate( Long.toString(db.getLong(DATE, 0)))),
+						db.getString(HTML_LINK, ""),
 						db.getInt(NUM1, 0), db.getInt(NUM2, 0), db.getInt(NUM3,0),
 						db.getInt(NUM4, 0), db.getInt(NUM5, 0), 
 						db.getInt(REINTEGRO, 0));

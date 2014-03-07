@@ -24,6 +24,7 @@ class QuinigolDB implements LotteryDB<Quinigol> {
 	public static final int NUM_MATCHES = 6;
 
 	private static final String DATE = "date";
+	private static final String HTML_LINK = "htmlLink";
 	private static final String HOME_TEAM = "ht";
 	private static final String AWAY_TEAM = "at";
 	private static final String HOME_RESULT = "homeresult";
@@ -62,6 +63,7 @@ class QuinigolDB implements LotteryDB<Quinigol> {
 
 		editor.putLong(DATE,
 				DateFormatter.toLotoluckString(quinigol.getDate()));
+		editor.putString(HTML_LINK, quinigol.getHtmlLink());
 		for(int matchNumber = 0; matchNumber < NUM_MATCHES; matchNumber++) {
 			editor.putString(HOME_TEAM + matchNumber, quinigol.getHomeTeam(matchNumber));
 			editor.putString(AWAY_TEAM + matchNumber, quinigol.getAwayTeam(matchNumber));
@@ -93,7 +95,8 @@ class QuinigolDB implements LotteryDB<Quinigol> {
 			if (isYear && isMonth && isDay && isHour) {
 
 				Quinigol quinigol = new Quinigol(
-						dfm.parse(DateLotteries.formatDate( Long.toString(db.getLong(DATE, 0)))));
+						dfm.parse(DateLotteries.formatDate( Long.toString(db.getLong(DATE, 0)))),
+						db.getString(HTML_LINK, ""));
 				
 				for(int matchNumber = 0; matchNumber < NUM_MATCHES; matchNumber++) {
 					quinigol.setMatch(matchNumber, db.getString(HOME_TEAM + matchNumber, ""), db.getString(AWAY_TEAM + matchNumber, ""),

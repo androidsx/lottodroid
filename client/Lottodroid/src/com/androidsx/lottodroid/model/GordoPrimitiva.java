@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * Results for a Bonoloto draw
  */
-public class GordoPrimitiva implements Lottery {
+public class GordoPrimitiva extends BaseLottery {
 	private final Date date;
 	private final int num1;
 	private final int num2;
@@ -16,8 +16,9 @@ public class GordoPrimitiva implements Lottery {
 	private final int reintegro;
 	private ArrayList<Premio> premios = new ArrayList<Premio>();
 
-	public GordoPrimitiva(Date date, int num1, int num2, int num3, int num4,
+	public GordoPrimitiva(Date date, String htmlLink, int num1, int num2, int num3, int num4,
 			int num5, int reintegro) {
+		super(htmlLink);
 		this.date = date;
 		this.num1 = num1;
 		this.num2 = num2;

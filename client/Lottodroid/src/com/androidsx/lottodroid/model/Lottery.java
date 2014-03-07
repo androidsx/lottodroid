@@ -11,4 +11,10 @@ public interface Lottery {
   public String getName();
   public Date getDate();
   
+  /**
+   * HTML for a link to more information about this lottery draw.
+   * 
+   * @return HTML for a link with more info
+   */
+  public String getHtmlLink();
 }

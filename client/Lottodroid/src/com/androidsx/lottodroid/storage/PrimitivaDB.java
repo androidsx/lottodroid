@@ -22,6 +22,7 @@ class PrimitivaDB implements LotteryDB<Primitiva> {
 	private static final String PRIMITIVA_FILE = "Primitiva";
 
 	private static final String DATE = "date";
+	private static final String HTML_LINK = "htmlLink";
 	private static final String NUM1 = "num1";
 	private static final String NUM2 = "num2";
 	private static final String NUM3 = "num3";
@@ -61,6 +62,7 @@ class PrimitivaDB implements LotteryDB<Primitiva> {
 
 		editor.putLong(DATE,
 				DateFormatter.toLotoluckString(primitiva.getDate()));
+		editor.putString(HTML_LINK, primitiva.getHtmlLink());
 		editor.putInt(NUM1, primitiva.getNum1());
 		editor.putInt(NUM2, primitiva.getNum2());
 		editor.putInt(NUM3, primitiva.getNum3());
@@ -93,6 +95,7 @@ class PrimitivaDB implements LotteryDB<Primitiva> {
 
 				Primitiva primitiva = new Primitiva(
 						dfm.parse(DateLotteries.formatDate( Long.toString(db.getLong(DATE, 0)))),
+						db.getString(HTML_LINK, ""),
 						db.getInt(NUM1, 0), db.getInt(NUM2, 0), db.getInt(NUM3,0),
 						db.getInt(NUM4, 0), db.getInt(NUM5, 0), db.getInt(NUM6, 0), 
 						db.getInt(REINTEGRO, 0), db.getInt(COMPLEMENTARIO, 0));

@@ -7,7 +7,7 @@ import java.util.Date;
  * Results for a Quinigol draw.
  * 
  */
-public class Quinigol implements FootballLotery {
+public class Quinigol extends BaseLottery implements FootballLotery {
 
 	public static final int NUM_MATCHES = 6;
 
@@ -22,7 +22,8 @@ public class Quinigol implements FootballLotery {
 	
 	private final Date date;
 
-	public Quinigol(Date date) {
+	public Quinigol(Date date, String htmlLink) {
+		super(htmlLink);
 		this.date = date;
 	}
 	
