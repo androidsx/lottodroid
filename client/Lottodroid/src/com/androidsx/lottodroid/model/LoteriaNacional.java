@@ -19,7 +19,7 @@ public class LoteriaNacional extends BaseLottery {
 	private ArrayList<Premio> premios = new ArrayList<Premio>();
 
 	public LoteriaNacional(Date date, String htmlLink, int premio1, int fraccion, int serie,
-			int premio2, int reintegro1, int reintegro2, int reintegro3) {
+			String premio2, int reintegro1, int reintegro2, int reintegro3) {
 		super(htmlLink);
 		this.date = date;
 		this.premio1 = premio1;

@@ -80,7 +80,7 @@ class SuperOnceDB implements LotteryDB<SuperOnce> {
 
 				SuperOnce lotortuf = new SuperOnce(
 						dfm.parse(DateLotteries.formatDate( Long.toString(db.getLong(DATE, 0)))),
-						db.getString(NUM1, ""));
+						"",db.getString(NUM1, ""));
 
 				int numPremios = db.getInt(NUM_PREMIOS, 0);
 				for (int i = 0; i < numPremios; i++)

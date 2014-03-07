@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * Results for a Lototurf draw
  */
-public class Eurojackpot implements Lottery {
+public class Eurojackpot  extends BaseLottery {
 	private final Date date;
 	private final int num1;
 	private final int num2;
@@ -17,8 +17,9 @@ public class Eurojackpot implements Lottery {
 	private final int s2;
 	private ArrayList<Premio> premios = new ArrayList<Premio>();
 
-	public Eurojackpot(Date date, int num1, int num2, int num3, int num4,
+	public Eurojackpot(Date date, String htmlLink, int num1, int num2, int num3, int num4,
 			int num5, int s1, int s2) {
+		super(htmlLink);
 		this.date = date;
 		this.num1 = num1;
 		this.num2 = num2;

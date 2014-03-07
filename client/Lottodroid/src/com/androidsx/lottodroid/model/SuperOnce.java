@@ -6,12 +6,13 @@ import java.util.Date;
 /**
  * Results for a Lototurf draw
  */
-public class SuperOnce implements Lottery {
+public class SuperOnce  extends BaseLottery {
 	private final Date date;
 	private final String result;
 	private ArrayList<Premio> premios = new ArrayList<Premio>();
 
-	public SuperOnce(Date date, String result) {
+	public SuperOnce(Date date, String htmlLink,  String result) {
+		super(htmlLink);
 		this.date = date;
 		this.result = result;
 	}

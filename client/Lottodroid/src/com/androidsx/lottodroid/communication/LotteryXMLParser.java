@@ -1083,7 +1083,7 @@ class LotteryXMLParser {
 			num[i] = Integer.parseInt(formatNumber(values.getNamedItem("Valor").getNodeValue()));
 		}
 		
-		Trio trio = new Trio(date, num[0], num[1], num[2]);
+		Trio trio = new Trio(date, extractHtmlLink(game), num[0], num[1], num[2]);
 		
 		results = game.getElementsByTagName("Premio");
 
@@ -1351,7 +1351,7 @@ class LotteryXMLParser {
 			num[i] = Integer.parseInt(formatNumber(values.getNamedItem("Valor").getNodeValue()));
 		}
 		
-		CuponExtraordinario trio = new CuponExtraordinario(date, num[0], "" + num[1]);
+		CuponExtraordinario trio = new CuponExtraordinario(date, extractHtmlLink(game), num[0], "" + num[1]);
 		
 		List<CuponExtraordinario> lotteryList = new LinkedList<CuponExtraordinario>();
 		lotteryList.add(trio);
@@ -1376,7 +1376,7 @@ class LotteryXMLParser {
 			num[i] = Integer.parseInt(formatNumber(values.getNamedItem("Valor").getNodeValue()));
 		}
 		
-		Eurojackpot lototurf = new Eurojackpot(date, num[0], num[1], num[2], num[3],
+		Eurojackpot lototurf = new Eurojackpot(date, extractHtmlLink(game), num[0], num[1], num[2], num[3],
 				num[4], num[5], num[6]);
 		
 		List<Eurojackpot> lotteryList = new LinkedList<Eurojackpot>();
@@ -1405,7 +1405,7 @@ class LotteryXMLParser {
 			}
 		}
 		
-		SuperOnce lototurf = new SuperOnce(date, numbers.toString());
+		SuperOnce lototurf = new SuperOnce(date, extractHtmlLink(game), numbers.toString());
 		
 		List<SuperOnce> lotteryList = new LinkedList<SuperOnce>();
 		lotteryList.add(lototurf);
@@ -1433,7 +1433,7 @@ class LotteryXMLParser {
 			}
 		}
 		
-		Super10 lototurf = new Super10(date, numbers.toString());
+		Super10 lototurf = new Super10(date, extractHtmlLink(game), numbers.toString());
 		
 		List<Super10> lotteryList = new LinkedList<Super10>();
 		lotteryList.add(lototurf);
