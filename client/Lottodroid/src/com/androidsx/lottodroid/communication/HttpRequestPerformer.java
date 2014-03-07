@@ -33,7 +33,7 @@ class HttpRequestPerformer {
   public static String getResponse(String url) throws MalformedURLException, IOException,
       UnknownHostException, SocketTimeoutException {
     HttpURLConnection http = (HttpURLConnection) new URL(url).openConnection();
-    http.setRequestMethod("GET");
+    http.setRequestMethod("POST");
     http.setDoInput(true);
     http.setConnectTimeout(CONNECT_TIMEOUT);
     http.setReadTimeout(READ_TIMEOUT);
@@ -63,7 +63,7 @@ class HttpRequestPerformer {
   public static String getResponse(String url, String encoding) throws MalformedURLException, IOException,
       UnknownHostException, SocketTimeoutException {
     HttpURLConnection http = (HttpURLConnection) new URL(url).openConnection();
-    http.setRequestMethod("GET");
+    http.setRequestMethod("POST");
     http.setDoInput(true);
     http.setConnectTimeout(CONNECT_TIMEOUT);
     http.setReadTimeout(READ_TIMEOUT);
