@@ -11,7 +11,8 @@
 				android:layout_width='fill_parent' android:layout_height='fill_parent'
 				android:layout_weight='1' android:textStyle="bold" android:textSize="16dip"
 				android:layout_marginTop='5dip' android:singleLine='true'
-				android:ellipsize='marquee' android:text='Premios' />
+				android:ellipsize='marquee' android:text='Premios'
+				 />
 			<LinearLayout android:orientation="vertical"
 				android:layout_width="fill_parent" android:layout_height="wrap_content"
 				android:id="@+id/premio_list_row">

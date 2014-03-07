@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_height="fill_parent"
+  android:layout_width="fill_parent">
+  <TableRow>
+    <TextView
+      android:text=" Números:"
+      android:padding="5dip"
+      android:textColor="#fee" />
+    <TextView
+      android:id="@+id/txtNumbers"
+      android:text="1 2 5 4 5 3 " />
+
+    <TextView
+      android:text=" S1:"
+      android:padding="5dip"
+      android:textColor="#fee" />
+    <TextView
+      android:id="@+id/txtS1"
+      android:text="2" />
+  </TableRow>
+   <TableRow>
+    <TextView
+      android:text=" S2:"
+      android:padding="5dip"
+      android:textColor="#fee" />
+    <TextView
+      android:id="@+id/txtS2"
+      android:text="1" />
+
+  </TableRow>
+</TableLayout>

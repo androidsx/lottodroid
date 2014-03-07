@@ -48,7 +48,7 @@ public class PrizeActivity extends Activity {
 			}
 			
 			// If we came from Lottodroid it's already stored, if not let's search!
-			stored = extras.getBoolean(Lottodroid.TAG);
+			stored = false; // WTF FIXME extras.getBoolean(Lottodroid.TAG);
 			
 			// Get the date, set from the main activity
 			date = (Long) extras.getSerializable("date");
@@ -113,9 +113,9 @@ public class PrizeActivity extends Activity {
 				
 				
 				try {
-					if(stored && !update) // Try to get the data from the database
-						listLottery = LotteryDBFactory.newLotteryDB(PrizeActivity.this, lotteryId).retrieveLottery();
-					else
+					//if(stored && !update) // Try to get the data from the database
+					//	listLottery = LotteryDBFactory.newLotteryDB(PrizeActivity.this, lotteryId).retrieveLottery();
+					//else
 						throw new Exception("We throw an exception to update results from Internet");
 				}  catch (Exception e) {
 					// No lottery stored or out of date, fetch it from Internet
@@ -153,6 +153,14 @@ public class PrizeActivity extends Activity {
 						listLottery = dataFetcher.retrieveQuintuplePlus(date);
 					} else if (lotteryId == LotteryId.TRIO) {
 						listLottery = dataFetcher.retrieveTrios(date);
+					} else if (lotteryId == LotteryId.CUPON_EXTRAORDINARIO) {
+						listLottery = dataFetcher.retrieveCuponExtraordinario(date);
+					} else if (lotteryId == LotteryId.EURO_JACKPOT) {
+						listLottery = dataFetcher.retrieveEurojackpot(date);
+					} else if (lotteryId == LotteryId.SUPER_ONCE) {
+						listLottery = dataFetcher.retrieveSuperOnce(date);
+					} else if (lotteryId == LotteryId.SUPER_10) {
+						listLottery = dataFetcher.retrieveSuper10(date);
 					} else {
 						// TODO(pablo): check this exception handling
 						throw new DataFormatException();
