@@ -67,7 +67,7 @@ class Super10ViewController implements LotteryViewController<Super10> {
 
   @Override
   public int getIconResource() {
-    return R.drawable.once;
+    return R.drawable.super10;
   }
 
   @Override
