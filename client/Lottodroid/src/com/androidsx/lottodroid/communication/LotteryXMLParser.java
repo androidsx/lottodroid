@@ -1,6 +1,7 @@
 package com.androidsx.lottodroid.communication;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -422,7 +423,12 @@ class LotteryXMLParser {
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
 					.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(new URL(url).openConnection().getInputStream());
+			
+			HttpURLConnection http = (HttpURLConnection) new URL(url).openConnection();
+			http.setRequestMethod("POST");
+			http.setDoInput(true);
+			
+			Document doc = dBuilder.parse(http.getInputStream());
 			doc.getDocumentElement().normalize();
 			String rootElement = doc.getDocumentElement().getNodeName();
 			if (rootElement.matches("error"))
@@ -560,8 +566,13 @@ class LotteryXMLParser {
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
 					.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+		     
+            HttpURLConnection http = (HttpURLConnection) new URL(url).openConnection();
+            http.setRequestMethod("POST");
+            http.setDoInput(true);
+            
+            Document doc = dBuilder.parse(http.getInputStream());
 
-			Document doc = dBuilder.parse(new URL(url).openConnection().getInputStream());
 			doc.getDocumentElement().normalize();
 
 			String rootElement = doc.getDocumentElement().getNodeName();
