@@ -1,6 +1,7 @@
 package com.androidsx.lottodroid.communication;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DateFormat;
@@ -418,15 +419,39 @@ class LotteryXMLParser {
 	public static List<Lottery> parseAllLotteries(String url)
 			throws LotteryParseException {
 
+	    String postParameters = null;
 		try {
-
+		    // HACK: remove the "?" and send a POST to lotoluck
+		    int startQueryString = url.indexOf("?");
+		    if (startQueryString != -1) {
+		        postParameters = url.substring(startQueryString + 1, url.length());    
+		        url = url.substring(0, startQueryString);
+		    }
+		    
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
 					.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			
 			HttpURLConnection http = (HttpURLConnection) new URL(url).openConnection();
-			http.setRequestMethod("POST");
+			http.setRequestMethod("POST");			
 			http.setDoInput(true);
+			http.setDoOutput(true);
+			
+            if (postParameters != null) {
+                http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                http.setFixedLengthStreamingMode(postParameters.getBytes().length);
+
+                // send the POST out
+                PrintWriter out = new PrintWriter(http.getOutputStream());
+                out.print(postParameters);
+                out.close();
+            }
+            
+            int statusCode = http.getResponseCode();
+            if (statusCode != HttpURLConnection.HTTP_OK) {
+                // throw some exception
+                Log.v(TAG, "" + statusCode);
+            }
 			
 			Document doc = dBuilder.parse(http.getInputStream());
 			doc.getDocumentElement().normalize();
@@ -562,7 +587,15 @@ class LotteryXMLParser {
 	private static Element parseContentTypeAndGetData(String url,
 			int contentType) throws LotteryParseException {
 
+	    String postParameters = null;
 		try {
+	          // HACK: remove the "?" and send a POST to lotoluck
+            int startQueryString = url.indexOf("?");
+            if (startQueryString != -1) {
+                postParameters = url.substring(startQueryString + 1, url.length());    
+                url = url.substring(0, startQueryString);
+            }
+		    
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
 					.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -570,7 +603,24 @@ class LotteryXMLParser {
             HttpURLConnection http = (HttpURLConnection) new URL(url).openConnection();
             http.setRequestMethod("POST");
             http.setDoInput(true);
+            http.setDoOutput(true);
             
+            if (postParameters != null) {
+                http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                http.setFixedLengthStreamingMode(postParameters.getBytes().length);
+
+                // send the POST out
+                PrintWriter out = new PrintWriter(http.getOutputStream());
+                out.print(postParameters);
+                out.close();
+                
+            }
+            int statusCode = http.getResponseCode();
+            if (statusCode != HttpURLConnection.HTTP_OK) {
+                // throw some exception
+                Log.v(TAG, "" + statusCode);
+            }
+
             Document doc = dBuilder.parse(http.getInputStream());
 
 			doc.getDocumentElement().normalize();
@@ -624,12 +674,17 @@ class LotteryXMLParser {
 		for (int i = 0; i < results.getLength(); i++) {
 			result = (Element) results.item(i);
 			values = result.getAttributes();
-			bonoloto.addPremio(
-					Integer.parseInt(formatNumber(values.getNamedItem("Acertantes").getNodeValue())),
-					values.getNamedItem("Categoria").getNodeValue(),
-					Float.parseFloat(formatNumber(values.getNamedItem("ImporteEuros").getNodeValue())),
-					0);
-			System.out.println(bonoloto.getPremio(i));
+			
+			try {
+    			bonoloto.addPremio(
+    					Integer.parseInt(formatNumber(values.getNamedItem("Acertantes").getNodeValue())),
+    					values.getNamedItem("Categoria").getNodeValue(),
+    					Float.parseFloat(formatNumber(values.getNamedItem("ImporteEuros").getNodeValue())),
+    					0);
+    			System.out.println(bonoloto.getPremio(i));
+			} catch (Exception ex) {
+			    Log.w(TAG, "Error during parsing premio of the bonotolo", ex);
+			}
 		}
 		List<Bonoloto> lotteryList = new LinkedList<Bonoloto>();
 		lotteryList.add(bonoloto);
@@ -795,7 +850,7 @@ class LotteryXMLParser {
 
 		// 6 resultados + complementario + reintegro
 		int num[] = new int[8];
-		long joker = 0;
+		String joker = "";
 		NodeList results = game.getElementsByTagName("Resultado");
 		NamedNodeMap values; Element result;
 		
@@ -806,7 +861,7 @@ class LotteryXMLParser {
 				num[i] = Integer.parseInt(formatNumber(values.getNamedItem("Valor").getNodeValue()));
 				System.out.print(num[i] + " ");
 			} else {
-				joker = Long.parseLong(values.getNamedItem("Valor").getNodeValue().trim());
+				joker = values.getNamedItem("Valor").getNodeValue().trim();
 				System.out.print(joker + " ");
 			}
 		}
@@ -1197,22 +1252,26 @@ class LotteryXMLParser {
 		
 		results = game.getElementsByTagName("Premio");
 
-		for (int i = 0; i < results.getLength(); i++) {
-			result = (Element) results.item(i);
-			values = result.getAttributes();
-			
-			if(values.getNamedItem("Categoria").getNodeValue().matches("Terminaciones"))
-				continue;
-			
-			loteriaNacional.addPremio(
-					values.getNamedItem("Categoria").getNodeValue(),
-					Float.parseFloat(values.getNamedItem("ImporteEuros").getNodeValue().trim().replace(".", "").replace(",", ".")),
-					0);
-			if(i < 3)
-				System.out.println(loteriaNacional.getPremio(i));
-			else
-				System.out.println(loteriaNacional.getPremio(2));
-		}
+		try {
+    		for (int i = 0; i < results.getLength(); i++) {
+    			result = (Element) results.item(i);
+    			values = result.getAttributes();
+    			
+    			if(values.getNamedItem("Categoria").getNodeValue().matches("Terminaciones"))
+    				continue;
+    			
+    			loteriaNacional.addPremio(
+    					values.getNamedItem("Categoria").getNodeValue(),
+    					Float.parseFloat(values.getNamedItem("ImporteEuros").getNodeValue().trim().replace(".", "").replace(",", ".")),
+    					0);
+    			if(i < 3)
+    				System.out.println(loteriaNacional.getPremio(i));
+    			else
+    				System.out.println(loteriaNacional.getPremio(2));
+    		}
+        } catch (Exception ex) {
+            Log.w(TAG, "Error during parsing premio of the loteria nacional", ex);
+        }
 
 		List<LoteriaNacional> lotteryList = new LinkedList<LoteriaNacional>();
 		lotteryList.add(loteriaNacional);

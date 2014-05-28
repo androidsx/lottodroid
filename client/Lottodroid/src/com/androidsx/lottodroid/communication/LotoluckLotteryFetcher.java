@@ -32,11 +32,13 @@ import com.androidsx.lottodroid.util.DateLotteries;
 
 public class LotoluckLotteryFetcher implements LotteryFetcher {
 
-	static final String URL_STRING = "http://lotoluck.com/utils/lotoluck_en_xml.php?username=DroidSX&password=pablOmar";
+	static final String URL_STRING = "http://lotoluck.com/utils/lotoluck_en_xml.php";
 	static final String DATE_VAR = "&fecha=";
 	static final String LOTTERY_VAR = "&juego=";
 	static final String LIMIT_VAR = "&limit=";
 	static final String START_VAR = "&start=";
+	
+	static final String CREDENTIALS_VALUES = "username=DroidSX&password=pablOmar";
 
 	public LotoluckLotteryFetcher(Context context)
 			throws LotteryInfoUnavailableException {
@@ -294,12 +296,12 @@ public class LotoluckLotteryFetcher implements LotteryFetcher {
 		StringBuilder url = new StringBuilder();
 
 		url.append(URL_STRING);
+		url.append("?" + CREDENTIALS_VALUES);
 
 		if (lotteryController != LotteryXMLParser.SORTEOS) {
 
 			url.append(DATE_VAR).append(date);
 			url.append(LOTTERY_VAR).append(lotteryController);
-
 		}
 		Log.i(Lottodroid.TAG, "Connecting to " + url.toString());
 

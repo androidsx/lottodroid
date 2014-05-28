@@ -72,7 +72,7 @@ class Lotto6_49DB implements LotteryDB<Lotto6_49> {
 		editor.putInt(NUM6, lotto6_49.getNum6());
 		editor.putInt(REINTEGRO, lotto6_49.getReintegro());
 		editor.putInt(COMPLEMENTARIO, lotto6_49.getComplementario());
-		editor.putLong(JOKER, lotto6_49.getJoker());
+		editor.putString(JOKER, lotto6_49.getJoker());
 
 		editor.putInt(NUM_PREMIOS, lotto6_49.getNumPremios());
 
@@ -101,7 +101,7 @@ class Lotto6_49DB implements LotteryDB<Lotto6_49> {
 						db.getInt(NUM1, 0), db.getInt(NUM2, 0), db.getInt(NUM3,0),
 						db.getInt(NUM4, 0), db.getInt(NUM5, 0), db.getInt(NUM6, 0), 
 						db.getInt(REINTEGRO, 0), db.getInt(COMPLEMENTARIO, 0), 
-						db.getLong(JOKER, 0));
+						db.getString(JOKER, ""));
 
 				int numPremios = db.getInt(NUM_PREMIOS, 0);
 				for (int i = 0; i < numPremios; i++)

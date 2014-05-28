@@ -68,7 +68,7 @@ class Lotto6_49ViewController implements LotteryViewController<Lotto6_49> {
     ((TextView) view.findViewById(R.id.txtNumbers)).setText(numbers);
     ((TextView) view.findViewById(R.id.txtComplementary)).setText(Integer.toString(lotto6_49.getComplementario()));
     ((TextView) view.findViewById(R.id.txtReinteger)).setText(Integer.toString(lotto6_49.getReintegro()));
-    ((TextView) view.findViewById(R.id.txtJoker)).setText(Long.toString(lotto6_49.getJoker()));
+    ((TextView) view.findViewById(R.id.txtJoker)).setText(lotto6_49.getJoker());
   }
 
   @Override

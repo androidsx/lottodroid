@@ -16,11 +16,11 @@ public class Lotto6_49 extends BaseLottery {
 	private final int num6;
 	private final int reintegro;
 	private final int complementario;
-	private final long joker;
+	private final String joker;
 	private ArrayList<Premio> premios = new ArrayList<Premio>();
 
 	public Lotto6_49(Date date, String htmlLink, int num1, int num2, int num3, int num4,
-			int num5, int num6, int reintegro, int complementario, long joker) {
+			int num5, int num6, int reintegro, int complementario, String joker) {
 		super(htmlLink);
 		this.date = date;
 		this.num1 = num1;
@@ -122,7 +122,7 @@ public class Lotto6_49 extends BaseLottery {
 		return complementario;
 	}
 	
-	public long getJoker() {
+	public String getJoker() {
 		return joker;
 	}
 
